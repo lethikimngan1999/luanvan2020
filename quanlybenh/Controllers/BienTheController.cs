@@ -85,6 +85,26 @@ namespace quanlybenh.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetListOfChungLoai")]
+
+        public async Task<BaseResponse<List<BienTheDTO>>> GetListOfChungLoai(string machungloai)
+        {
+            try
+            {
+                var result = _bientheService.GetListOfChungLoai(machungloai);
+                if (result != null)
+                {
+                    return await Task.FromResult(new BaseResponse<List<BienTheDTO>>(result));
+                }
+                return await Task.FromResult(new BaseResponse<List<BienTheDTO>>(Message.GetDataNotSuccess));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(new BaseResponse<List<BienTheDTO>>(Message.GetDataNotSuccess));
+            }
+        }
+
         [HttpPost]
  
         public async Task<BaseResponse> InsertAll(BienTheDTO entity)

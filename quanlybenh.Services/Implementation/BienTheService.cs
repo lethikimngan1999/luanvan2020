@@ -252,5 +252,63 @@ namespace quanlybenh.Services.Implementation
                 return null;
             }
         }
+
+        public List<BienTheDTO> GetListOfChungLoai(string machungloai)
+        {
+            try
+            {
+                var _lst = _bientheRepository.GetMany(p => p.MaChungLoai.ToString().ToLower() == machungloai.ToLower().Trim()).ToList();
+                if (_lst == null)
+                {
+                    return null;
+                }
+                var bientheDto = _mapper.Map< List<BienTheDTO>>(_lst);
+
+                var entities = new List<HinhAnhBienThe>();
+
+
+                foreach (var item in bientheDto)
+                {
+                    //get thông tin giong
+                    var giong = _giongRepository.GetById(item.MaGiong);
+                    item.Giongs = _mapper.Map<GiongDTO>(giong);
+
+                    //get thông tin chung loai
+                    var chungloai = _chungloaiRepository.GetById(item.MaChungLoai);
+                    item.ChungLoais = _mapper.Map<ChungLoaiDTO>(chungloai);
+
+                    //get thông tin chat luong
+                    var chatluong = _chatluongRepository.GetById(item.MaChatLuong);
+                    item.ChatLuongs = _mapper.Map<ChatLuongDTO>(chatluong);
+
+                    // get hinh anh
+
+                    var hinhanh = _hinhanhRepository.GetMany(p => p.MaBienThe == item.MaBienThe && p.ChonAvt == true).OrderByDescending(p => p.NgayTao).ToList();
+
+                    //var sql = from ha in hinhanh
+                    //          where ha.ChonAvt == true
+                    //          select ha;
+
+                    //entities = sql.OrderByDescending(c => c.NgayTao).ToList();
+
+                    // item.Listhas = _mapper.Map<List<HinhAnhBienTheDTO>>(entities);
+
+                    if (hinhanh.Count() > 0)
+                    {
+                        foreach (var ha in hinhanh.Take(1))
+                        {
+                            item.Mahas = ha.DuongDan;
+                        }
+
+
+                    }
+                }
+                return bientheDto;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
     }
 }
