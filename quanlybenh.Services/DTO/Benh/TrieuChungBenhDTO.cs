@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace quanlybenh.Services.DTO.Benh
 {
-    public class TrieuChungDTO
+   public class TrieuChungBenhDTO
     {
+        public Guid MaBenh { get; set; }
         public Guid MaTrieuChung { get; set; }
 
-    
-    
-        public string TenTrieuChung { get; set; }
+        public BenhDTO Benh { get; set; }
 
-        public string MoTaTrieuChung { get; set; }
-
-    
+        public TrieuChungDTO TrieuChung { get; set; }
     }
 }

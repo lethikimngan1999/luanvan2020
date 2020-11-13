@@ -243,6 +243,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ThuocController.cs" />
     <Compile Include="Controllers\ThuocDieuTriController.cs" />
+    <Compile Include="Controllers\TrieuChungBenhController.cs" />
     <Compile Include="Controllers\TrieuChungController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />

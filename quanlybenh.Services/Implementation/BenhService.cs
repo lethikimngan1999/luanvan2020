@@ -145,9 +145,9 @@ namespace quanlybenh.Services.Implementation
                 benhDto.MaThuocs = _lstThuocDieuTris.Where(p => p.MaBenh == benhDto.MaBenh)?.Select(p => p.MaThuoc.ToString());
 
                 // list triệu chứng
-                var _lstTrieuChungs = _trieuchungRepository.GetMany(p => p.MaBenh == benhDto.MaBenh).ToList();
-                benhDto.ListTrieuChungs = _mapper.Map<List<TrieuChungDTO>>(_lstTrieuChungs);
-                benhDto.MaTrieuChungs = _lstTrieuChungs.Where(p => p.MaBenh == benhDto.MaBenh)?.Select(p => p.MaTrieuChung.ToString());
+                //var _lstTrieuChungs = _trieuchungRepository.GetMany(p => p.MaBenh == benhDto.MaBenh).ToList();
+                //benhDto.ListTrieuChungs = _mapper.Map<List<TrieuChungDTO>>(_lstTrieuChungs);
+                //benhDto.MaTrieuChungs = _lstTrieuChungs.Where(p => p.MaBenh == benhDto.MaBenh)?.Select(p => p.MaTrieuChung.ToString());
 
               
 
@@ -281,7 +281,7 @@ namespace quanlybenh.Services.Implementation
                 var benh = _benhRepository.GetById(new Guid(mabenh));
                 if (benh == null) return false;
               //  var lieutrinhs = _lieutrinhRepository.GetAll().Where(p => p.MaBenh == benh.MaBenh).ToList();
-                var trieuchungs = _trieuchungRepository.GetAll().Where(p => p.MaBenh == benh.MaBenh).ToList();
+              //  var trieuchungs = _trieuchungRepository.GetAll().Where(p => p.MaBenh == benh.MaBenh).ToList();
                 var thuocdieutris = _thuocdieutriRepository.GetAll().Where(p => p.MaBenh == benh.MaBenh).ToList();
 
                 //foreach (var item in lieutrinhs)
@@ -294,8 +294,8 @@ namespace quanlybenh.Services.Implementation
                 //foreach (var item in trieuchungs)
                 //{
                    // var trieuchung = trieuchungs.Where(p => p.MaBenh == item.MaBenh).FirstOrDefault();
-                    _trieuchungRepository.RemoveMultiple(trieuchungs);
-                    _unitOfWork.Commit();
+                    //_trieuchungRepository.RemoveMultiple(trieuchungs);
+                    //_unitOfWork.Commit();
                // }
 
      

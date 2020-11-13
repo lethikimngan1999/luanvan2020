@@ -125,6 +125,7 @@
     <Compile Include="Entities\Thuoc.cs" />
     <Compile Include="Entities\ThuocDieuTri.cs" />
     <Compile Include="Entities\TrieuChung.cs" />
+    <Compile Include="Entities\TrieuChungBenh.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

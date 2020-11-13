@@ -43,6 +43,7 @@ namespace quanlybenh.DataModels.Entities
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Thuoc> Thuocs { get; set; }
         public virtual DbSet<ThuocDieuTri> ThuocDieuTris { get; set; }
+        public virtual DbSet<TrieuChungBenh> TrieuChungBenhs { get; set; }
         public virtual DbSet<TrieuChung> TrieuChungs { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
@@ -61,10 +62,7 @@ namespace quanlybenh.DataModels.Entities
                 .WithRequired(e => e.Benh)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Benh>()
-                .HasMany(e => e.TrieuChungs)
-                .WithRequired(e => e.Benh)
-                .WillCascadeOnDelete(false);
+          
 
             modelBuilder.Entity<BienThe>()
                 .HasMany(e => e.Cas)

@@ -15,10 +15,10 @@ namespace quanlybenh.Controllers
     [RoutePrefix("api/TrieuChung")]
     public class TrieuChungController : ApiController
     {
-        private ITrieuChungSevice _TrieuChungService;
+        private ITrieuChungService _TrieuChungService;
 
         public TrieuChungController(
-               ITrieuChungSevice TrieuChungService)
+               ITrieuChungService TrieuChungService)
         {
             _TrieuChungService = TrieuChungService;
         }

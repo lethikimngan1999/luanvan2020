@@ -79,6 +79,9 @@ namespace quanlybenh.Services.AutoMapper
             CreateMap<Ca, CaDTO>();
             CreateMap<CaDTO, Ca>();
 
+            CreateMap<TrieuChungBenh, TrieuChungBenhDTO>();
+            CreateMap<TrieuChungBenhDTO, TrieuChungBenh>();
+
         }
     }
 

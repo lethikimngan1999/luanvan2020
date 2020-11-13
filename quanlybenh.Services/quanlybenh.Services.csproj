@@ -111,6 +111,7 @@
     <Compile Include="DTO\Benh\LieuTrinhDTO.cs" />
     <Compile Include="DTO\Benh\ThuocDieuTriBenhDTO.cs" />
     <Compile Include="DTO\Benh\ThuocDTO.cs" />
+    <Compile Include="DTO\Benh\TrieuChungBenhDTO.cs" />
     <Compile Include="DTO\Benh\TrieuChungDTO.cs" />
     <Compile Include="DTO\BienThe\BienTheDTO.cs" />
     <Compile Include="DTO\BienThe\ChatLuongDTO.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Implementation\RoleService.cs" />
     <Compile Include="Implementation\ThuocDieuTriService.cs" />
     <Compile Include="Implementation\ThuocService.cs" />
+    <Compile Include="Implementation\TrieuChungBenhService.cs" />
     <Compile Include="Implementation\TrieuChungService.cs" />
     <Compile Include="Implementation\UserRoleService.cs" />
     <Compile Include="Implementation\UserService.cs" />
@@ -157,7 +159,8 @@
     <Compile Include="Interfaces\IRoleService.cs" />
     <Compile Include="Interfaces\IThuocDieuTriService.cs" />
     <Compile Include="Interfaces\IThuocService.cs" />
-    <Compile Include="Interfaces\ITrieuChungSevice.cs" />
+    <Compile Include="Interfaces\ITrieuChungBenhService.cs" />
+    <Compile Include="Interfaces\ITrieuChungService.cs" />
     <Compile Include="Interfaces\IUserRoleService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

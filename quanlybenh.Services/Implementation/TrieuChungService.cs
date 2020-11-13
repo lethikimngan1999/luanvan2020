@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace quanlybenh.Services.Implementation
 {
-    public class TrieuChungService : BaseService, ITrieuChungSevice
+    public class TrieuChungService : BaseService, ITrieuChungService
     {
 
         private IDataRepository<TrieuChung> _trieuchungRepository;
@@ -36,14 +36,14 @@ namespace quanlybenh.Services.Implementation
         {
           try
             {
-                //var item = CheckExistsTenTrieuChung(trieuchungDto.TenTrieuChung);
-                //if (item) return false;
+                var item = CheckExistsTenTrieuChung(trieuchungDto.TenTrieuChung);
+                if (item) return false;
                 var trieuchung = new TrieuChung
                 {
                     MaTrieuChung = Guid.NewGuid(),
                     TenTrieuChung = trieuchungDto.TenTrieuChung,
                     MoTaTrieuChung = trieuchungDto.MoTaTrieuChung,
-                    MaBenh = trieuchungDto.MaBenh
+                 //   MaBenh = trieuchungDto.MaBenh
                 };
 
                 _trieuchungRepository.Insert(trieuchung);
@@ -70,7 +70,7 @@ namespace quanlybenh.Services.Implementation
                 trieuchung.TenTrieuChung = trieuchungDto.TenTrieuChung;
                 trieuchung.MoTaTrieuChung = trieuchungDto.MoTaTrieuChung;
 
-                trieuchung.MaBenh = trieuchungDto.MaBenh;
+              //  trieuchung.MaBenh = trieuchungDto.MaBenh;
 
 
                 // update user
@@ -89,11 +89,11 @@ namespace quanlybenh.Services.Implementation
             var _lstTrieuChungs = _trieuchungRepository.GetAll().OrderBy(x => x.TenTrieuChung).ToList();
             var trieuchungDtos = _mapper.Map<List<TrieuChungDTO>>(_lstTrieuChungs);
 
-            foreach(var item in trieuchungDtos)
-            {
-                var benh = _benhRepository.GetById(item.MaBenh);
-                item.Benh = _mapper.Map<BenhDTO>(benh);
-            }
+            //foreach(var item in trieuchungDtos)
+            //{
+            //    var benh = _benhRepository.GetById(item.MaBenh);
+            //    item.Benh = _mapper.Map<BenhDTO>(benh);
+            //}
             return trieuchungDtos;
         }
 

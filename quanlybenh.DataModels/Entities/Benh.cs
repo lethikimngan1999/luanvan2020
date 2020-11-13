@@ -14,7 +14,7 @@ namespace quanlybenh.DataModels.Entities
         {
           
             ThuocDieuTris = new HashSet<ThuocDieuTri>();
-            TrieuChungs = new HashSet<TrieuChung>();
+            TrieuChungBenhs = new HashSet<TrieuChungBenh>();
         }
 
         [Key]
@@ -35,6 +35,6 @@ namespace quanlybenh.DataModels.Entities
         public virtual ICollection<ThuocDieuTri> ThuocDieuTris { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TrieuChung> TrieuChungs { get; set; }
+        public virtual ICollection<TrieuChungBenh> TrieuChungBenhs { get; set; }
     }
 }

@@ -77,7 +77,8 @@ namespace quanlybenh
             services.AddTransient<IBenhService, BenhService>();
             services.AddTransient<IThuocDieuTriService, ThuocDieuTriService>();
             services.AddTransient<ILieuTrinhService, LieuTrinhService>();
-            services.AddTransient<ITrieuChungSevice, TrieuChungService>();
+            services.AddTransient<ITrieuChungService, TrieuChungService>();
+            services.AddTransient<ITrieuChungBenhService, TrieuChungBenhService>();
             services.AddTransient<ICaService, CaService>();
             services.AddTransient<IChungLoaiService, ChungLoaiService>();
             services.AddTransient<IChatLuongService, ChatLuongService>();

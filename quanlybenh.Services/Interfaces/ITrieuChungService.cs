@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace quanlybenh.Services.Interfaces
 {
-   public interface ITrieuChungSevice
+   public interface ITrieuChungService
     {
         List<TrieuChungDTO> GetAll();
         bool Update(TrieuChungDTO trieuchungDto);
