@@ -18,7 +18,7 @@ namespace quanlybenh.Services.Implementation
         private IDataRepository<Benh> _benhRepository;
         private IDataRepository<Thuoc> _thuocRepository;
         private IDataRepository<TrieuChung> _trieuchungRepository;
-   
+        private IDataRepository<TrieuChungBenh> _trieuchungbenhRepository;
         private IDataRepository<ThuocDieuTri> _thuocdieutriRepository;
 
         private readonly IMapper _mapper;
@@ -27,7 +27,7 @@ namespace quanlybenh.Services.Implementation
                IDataRepository<Benh> benhRepository,
                IDataRepository<Thuoc> thuocRepository,
                IDataRepository<TrieuChung> trieuchungRepository,
-         
+           IDataRepository<TrieuChungBenh> trieuchungbenhRepository,
                IDataRepository<ThuocDieuTri> thuocdieutriRepository,
 
                IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork)
@@ -35,7 +35,7 @@ namespace quanlybenh.Services.Implementation
             _benhRepository = benhRepository;
             _thuocRepository = thuocRepository;
             _trieuchungRepository = trieuchungRepository;
-         
+            _trieuchungbenhRepository = trieuchungbenhRepository;
             _thuocdieutriRepository = thuocdieutriRepository;
             _mapper = mapper;
         }
@@ -104,6 +104,21 @@ namespace quanlybenh.Services.Implementation
 
                 benh.MaThuocs = _lstThuocDieuTris.Where(p => p.MaBenh == benh.MaBenh)?.Select(p => p.MaThuoc.ToString());
 
+
+                // list triệu chứng cho bệnh
+                var entitiestt = new List<TrieuChung>();
+
+                var _lstTrieuchungbenhs = _trieuchungbenhRepository.GetMany(p => p.MaBenh == benh.MaBenh).ToList();
+                var _lstTrieuchungs = _trieuchungRepository.GetAll().ToList();
+
+                var sqltt = from trieuchung in _lstTrieuchungs
+                            join trieuchungbenh in _lstTrieuchungbenhs on trieuchung.MaTrieuChung equals trieuchungbenh.MaTrieuChung
+                            select trieuchung;
+                entitiestt = sqltt.OrderByDescending(c => c.TenTrieuChung).ToList();
+                benh.ListTrieuChungs = _mapper.Map<List<TrieuChungDTO>>(entitiestt);
+
+                benh.MaTrieuChungs = _lstTrieuchungbenhs.Where(p => p.MaBenh == benh.MaBenh)?.Select(p => p.MaTrieuChung.ToString());
+
             }
 
             return benhDtos;
@@ -144,12 +159,25 @@ namespace quanlybenh.Services.Implementation
 
                 benhDto.MaThuocs = _lstThuocDieuTris.Where(p => p.MaBenh == benhDto.MaBenh)?.Select(p => p.MaThuoc.ToString());
 
-                // list triệu chứng
+                //  list triệu chứng
                 //var _lstTrieuChungs = _trieuchungRepository.GetMany(p => p.MaBenh == benhDto.MaBenh).ToList();
-                //benhDto.ListTrieuChungs = _mapper.Map<List<TrieuChungDTO>>(_lstTrieuChungs);
-                //benhDto.MaTrieuChungs = _lstTrieuChungs.Where(p => p.MaBenh == benhDto.MaBenh)?.Select(p => p.MaTrieuChung.ToString());
+                // benhDto.ListTrieuChungs = _mapper.Map<List<TrieuChungDTO>>(_lstTrieuChungs);
+                // benhDto.MaTrieuChungs = _lstTrieuChungs.Where(p => p.MaBenh == benhDto.MaBenh)?.Select(p => p.MaTrieuChung.ToString());
 
-              
+                // list triệu chứng cho bệnh
+                var entitiestt = new List<TrieuChung>();
+
+                var _lstTrieuchungbenhs = _trieuchungbenhRepository.GetMany(p => p.MaBenh == benhDto.MaBenh).ToList();
+                var _lstTrieuchungs = _trieuchungRepository.GetAll().ToList();
+
+                var sqltt = from trieuchung in _lstTrieuchungs
+                            join trieuchungbenh in _lstTrieuchungbenhs on trieuchung.MaTrieuChung equals trieuchungbenh.MaTrieuChung
+                          select trieuchung;
+                entitiestt = sqltt.OrderByDescending(c => c.TenTrieuChung).ToList();
+                benhDto.ListTrieuChungs = _mapper.Map<List<TrieuChungDTO>>(entitiestt);
+
+                benhDto.MaTrieuChungs = _lstTrieuchungbenhs.Where(p => p.MaBenh == benhDto.MaBenh)?.Select(p => p.MaTrieuChung.ToString());
+
 
                 return benhDto;
             }
@@ -187,6 +215,17 @@ namespace quanlybenh.Services.Implementation
                 _unitOfWork.Commit();
             }
 
+
+            if (userRoleDataPopups.MaTrieuChungs != null)
+            {
+                foreach (var matrieuchung in userRoleDataPopups.MaTrieuChungs)
+                {
+                    var trieuchungbenh = new TrieuChungBenh { MaBenh = benh.MaBenh, MaTrieuChung = new Guid(matrieuchung) };
+                    _trieuchungbenhRepository.Insert(trieuchungbenh);
+                }
+                _unitOfWork.Commit();
+            }
+
             // liệu trình
 
             //if (userRoleDataPopups.ListLieuTrinhs.Count <= 0)
@@ -198,7 +237,7 @@ namespace quanlybenh.Services.Implementation
             //{
             //    var roleViewModel = userRoleDataPopups.ListLieuTrinhs[i];
 
-               
+
             //    //if (LieuTrinhConstant.MaLieuTrinh_Empty.Equals(roleViewModel.MaLieuTrinh.ToString()))
             //    //{
             //        roleViewModel.MaBenh = benh.MaBenh;
@@ -226,13 +265,13 @@ namespace quanlybenh.Services.Implementation
             //            _lieutrinhRepository.Update(LieuTrinh);
             //            break;
             //    }
-              
+
             //}
-            
+
             // delete record
 
             //  DeleteRecord(userId, lstData);
-          //  _unitOfWork.Commit();
+            //  _unitOfWork.Commit();
             return true;
         }
 

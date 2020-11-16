@@ -147,5 +147,21 @@ namespace quanlybenh.Services.Implementation
                 return false;
             }
         }
+
+        public List<TrieuChungBenhDTO> GetAllTRieuChungBenhByType(string searchString)
+        {
+            var entities = new List<TrieuChungBenh>();
+            if (!string.IsNullOrEmpty(searchString) )
+            {
+                            var lstTrieuChungs = _trieuchungRepository.GetAll();
+                            var lstTrieuChungBenhs = _trieuchungbenhRepository.GetAll();
+                            var sql = from trieuchungbenh in lstTrieuChungBenhs
+                                      join trieuchung in lstTrieuChungs on trieuchungbenh.MaTrieuChung equals trieuchung.MaTrieuChung
+                                      where trieuchung.TenTrieuChung.Contains(searchString) 
+                                      select trieuchungbenh;
+                            entities = sql.OrderByDescending(c => c.MaBenh).ToList();
+            }
+            return _mapper.Map<List<TrieuChungBenhDTO>>(entities);
+        }
     }
 }

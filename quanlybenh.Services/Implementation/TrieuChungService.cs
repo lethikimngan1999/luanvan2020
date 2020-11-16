@@ -17,18 +17,20 @@ namespace quanlybenh.Services.Implementation
 
         private IDataRepository<TrieuChung> _trieuchungRepository;
         private IDataRepository<Benh> _benhRepository;
-
+        private IDataRepository<TrieuChungBenh> _trieuchungbenhRepository;
         private readonly IMapper _mapper;
         private IBenhService _benhService;
         public TrieuChungService(
             IDataRepository<TrieuChung> trieuchungRepository,
             IDataRepository<Benh> benhRepository,
+             IDataRepository<TrieuChungBenh> trieuchungbenhRepository,
             IBenhService benhService,
             IUnitOfWork unitOfWork, IMapper mapper): base (unitOfWork)
         {
             _trieuchungRepository = trieuchungRepository;
             _benhRepository = benhRepository;
             _benhService = benhService;
+            _trieuchungbenhRepository = trieuchungbenhRepository;
             _mapper = mapper;
 
         }
@@ -48,6 +50,21 @@ namespace quanlybenh.Services.Implementation
 
                 _trieuchungRepository.Insert(trieuchung);
                 _unitOfWork.Commit();
+
+                if (trieuchungDto.MaBenhs != null)
+                {
+                    foreach (var mabenh in trieuchungDto.MaBenhs)
+                    {
+                        var trieuchungbenh = new TrieuChungBenh
+                        {
+                            MaTrieuChung = trieuchung.MaTrieuChung,
+                            MaBenh = new Guid(mabenh)
+                        };
+                        _trieuchungbenhRepository.Insert(trieuchungbenh);
+
+                    }
+                    _unitOfWork.Commit();
+                }
                 return true;
 
             }catch(Exception ex)
@@ -89,6 +106,23 @@ namespace quanlybenh.Services.Implementation
             var _lstTrieuChungs = _trieuchungRepository.GetAll().OrderBy(x => x.TenTrieuChung).ToList();
             var trieuchungDtos = _mapper.Map<List<TrieuChungDTO>>(_lstTrieuChungs);
 
+            var entities = new List<Benh>();
+            foreach (var trieuchung in trieuchungDtos)
+            {
+                // get danh sach benh
+
+                var _lstTrieuchungbenhs = _trieuchungbenhRepository.GetMany(p => p.MaTrieuChung == trieuchung.MaTrieuChung).ToList();
+                var _lstBenhs = _benhRepository.GetAll().ToList();
+
+                var sql = from benh in _lstBenhs
+                          join trieuchungbenh in _lstTrieuchungbenhs on benh.MaBenh equals trieuchungbenh.MaBenh
+                          select benh;
+                entities = sql.OrderByDescending(c => c.TenBenh).ToList();
+                trieuchung.ListBenhs = _mapper.Map<List<BenhDTO>>(entities);
+
+                trieuchung.MaBenhs = _lstTrieuchungbenhs.Where(p => p.MaTrieuChung == trieuchung.MaTrieuChung)?.Select(p => p.MaBenh.ToString());
+
+            }
             //foreach(var item in trieuchungDtos)
             //{
             //    var benh = _benhRepository.GetById(item.MaBenh);

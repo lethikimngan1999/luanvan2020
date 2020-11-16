@@ -46,6 +46,27 @@ namespace quanlybenh.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetAllTrieuChung")]
+
+        public async Task<BaseResponse<List<TrieuChungBenhDTO>>> GetAllTrieuChung(string matrieuchung)
+        {
+            try
+            {
+                var result = _trieuchungbenhService.GetAllTRieuChungBenhByType(matrieuchung);
+                if (result != null)
+                {
+                    return await Task.FromResult(new BaseResponse<List<TrieuChungBenhDTO>>(result, true)).ConfigureAwait(false);
+                }
+
+                return await Task.FromResult(new BaseResponse<List<TrieuChungBenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+            }
+            catch
+            {
+                return await Task.FromResult(new BaseResponse<List<TrieuChungBenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+            }
+        }
+
         //[HttpGet]
         //[Route("GetTrieuChungOfBenh")]
         //public async Task<BaseResponse<List<ThuocDTO>>> GetTrieuChungOfBenh(string mabenh)
