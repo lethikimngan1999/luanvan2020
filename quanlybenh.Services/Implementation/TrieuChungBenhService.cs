@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static quanlybenh.Utilities.Configurations.Constants;
 
 namespace quanlybenh.Services.Implementation
 {
@@ -16,6 +17,7 @@ namespace quanlybenh.Services.Implementation
     {
         IDataRepository<TrieuChungBenh> _trieuchungbenhRepository;
         private IDataRepository<TrieuChung> _trieuchungRepository;
+        private IDataRepository<Benh> _benhRepository;
         private readonly ITrieuChungService _trieuchungService;
         private readonly IBenhService _benhService;
 
@@ -25,6 +27,7 @@ namespace quanlybenh.Services.Implementation
         public TrieuChungBenhService(
             IDataRepository<TrieuChungBenh> trieuchungbenhRepository,
             IDataRepository<TrieuChung> trieuchungRepository,
+               IDataRepository<Benh> benhRepository,
             ITrieuChungService trieuchungService,
             IBenhService benhService,
             IUnitOfWork unitOfWork,
@@ -33,6 +36,7 @@ namespace quanlybenh.Services.Implementation
             _unitOfWork = unitOfWork;
             _trieuchungbenhRepository = trieuchungbenhRepository;
             _trieuchungRepository = trieuchungRepository;
+            _benhRepository = benhRepository;
             _trieuchungService = trieuchungService;
             _benhService = benhService;
             _mapper = mapper;
@@ -100,7 +104,7 @@ namespace quanlybenh.Services.Implementation
             var trieuchungbenhDtos = _mapper.Map<List<TrieuChungBenhDTO>>(lstTrieuchungbenh);
             foreach (var item in trieuchungbenhDtos)
             {
-                 var trieuchung = _trieuchungRepository.GetById(item.MaTrieuChung.ToString());
+                var trieuchung = _trieuchungRepository.GetById(item.MaTrieuChung.ToString());
                 item.TrieuChung = _mapper.Map<TrieuChungDTO>(trieuchung);
 
                 var benh = _benhService.GetById(item.MaBenh.ToString());
@@ -148,20 +152,108 @@ namespace quanlybenh.Services.Implementation
             }
         }
 
-        public List<TrieuChungBenhDTO> GetAllTRieuChungBenhByType(string searchString)
+        public List<TrieuChungBenhDTO> GetAllTRieuChungBenhByType(List<SearchDTO> searchString)
         {
-            var entities = new List<TrieuChungBenh>();
-            if (!string.IsNullOrEmpty(searchString) )
+            // var statuses = new[] { searchString };
+
+            var entities = new List<TrieuChungBenhDTO>();
+            //if (!string.IsNullOrEmpty(searchString))
+            //{
+            if (searchString.Count() > 0)
             {
-                            var lstTrieuChungs = _trieuchungRepository.GetAll();
-                            var lstTrieuChungBenhs = _trieuchungbenhRepository.GetAll();
-                            var sql = from trieuchungbenh in lstTrieuChungBenhs
-                                      join trieuchung in lstTrieuChungs on trieuchungbenh.MaTrieuChung equals trieuchung.MaTrieuChung
-                                      where trieuchung.TenTrieuChung.Contains(searchString) 
-                                      select trieuchungbenh;
-                            entities = sql.OrderByDescending(c => c.MaBenh).ToList();
+                var lstTrieuChungs = _trieuchungRepository.GetAll().ToList();
+                var lstTrieuChungBenhs = _trieuchungbenhRepository.GetAll().ToList();
+
+                List<TrieuChungBenh> sql = new List<TrieuChungBenh>();
+              
+                foreach (var a in searchString)
+                    {
+                    List<TrieuChungBenh> sql1 = new List<TrieuChungBenh>();
+                     sql1 = (from trieuchungbenh in lstTrieuChungBenhs
+                               where trieuchungbenh.MaTrieuChung == a.search
+                               select trieuchungbenh).ToList();
+
+                    if(sql.Count()>0)
+                    {
+                        foreach (var b in sql1)
+                        {
+                            if (sql.Where(x => x.MaBenh == b.MaBenh).Count() > 0)
+                            {
+                                sql = sql.Where(x => x.MaBenh == b.MaBenh).ToList();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        sql = sql1;
+                    }
+
+
+                    //if (sql.Count() > sql1.Count())
+                    //{
+                    //      sql = sql.Intersect(sql1);
+                    //}
+                    //else
+                    //{
+                    //    sql = sql.Intersect(sql1);
+                    //}
+                }
+                //sql = sql1.Intersect(sql);
+                foreach (var b in sql)
+                    {
+
+                        entities.Add(new TrieuChungBenhDTO { MaBenh = b.MaBenh, MaTrieuChung = b.MaTrieuChung });
+
+                    }
+                
+               
+
+
+                //var lstTrieuChungs = _trieuchungRepository.GetAll();
+                //var lstTrieuChungBenhs = _trieuchungbenhRepository.GetAll();
+                //var lstBenhs = _benhRepository.GetAll();
+                //var sql = from
+                //               trieuchung in lstTrieuChungs
+                //          join trieuchungbenh in lstTrieuChungBenhs on trieuchung.MaTrieuChung equals trieuchungbenh.MaTrieuChung
+                //          join benh in lstBenhs on trieuchungbenh.MaBenh equals benh.MaBenh
+                //          where statuses.Contains(trieuchung.TenTrieuChung)
+                //          select trieuchungbenh;
+                //entities = sql.OrderByDescending(c => c.MaBenh).ToList();
+
             }
-            return _mapper.Map<List<TrieuChungBenhDTO>>(entities);
+
+
+
+
+
+            //    var lstTrieuChungs = _trieuchungRepository.GetAll();
+            //var lstTrieuChungBenhs = _trieuchungbenhRepository.GetAll();
+            //var sql = from trieuchungbenh in lstTrieuChungBenhs
+            //          join trieuchung in lstTrieuChungs on trieuchungbenh.MaTrieuChung equals trieuchung.MaTrieuChung
+            //          where trieuchung.TenTrieuChung.Contains(searchString)
+            //          select trieuchungbenh;
+            //entities = sql.OrderByDescending(c => c.MaBenh).ToList();
+            // }
+            return entities.ToList();
+
         }
+
+        //public List<TrieuChungBenhDTO> GetAllTrieuChungActive( Guid matrieuchung)
+        //{
+        //    //var _lstTrieuChungBenhs = _trieuchungbenhRepository.GetMany(p => p.selected == StatusObject.True && p.MaTrieuChung == matrieuchung ).ToList();
+        //    //var trieuchungbenhDtos = _mapper.Map<List<TrieuChungBenhDTO>>(_lstTrieuChungBenhs);
+
+        //   // var entities = new List<Role>();
+
+        //    //foreach (var item in trieuchungbenhDtos)
+        //    //{
+        //    //    var trieuchung = _trieuchungRepository.GetById(item.MaTrieuChung.ToString());
+        //    //    item.TrieuChung = _mapper.Map<TrieuChungDTO>(trieuchung);
+
+        //    //    var benh = _benhService.GetById(item.MaBenh.ToString());
+        //    //    item.Benh = _mapper.Map<BenhDTO>(benh);
+        //    //}
+        //    return trieuchungbenhDtos;
+        //}
     }
 }

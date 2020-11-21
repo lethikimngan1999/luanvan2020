@@ -16,6 +16,8 @@ namespace quanlybenh.Services.Interfaces
         bool Add(List<TrieuChungBenhDTO> trieuchungbenhDtos);
 
         bool AddTrieuChungBenh(List<TrieuChungBenhDTO> trieuchungbenhDtos);
-        List<TrieuChungBenhDTO> GetAllTRieuChungBenhByType(string searchString);
+        List<TrieuChungBenhDTO> GetAllTRieuChungBenhByType(List<SearchDTO> searchString);
+     //   List<TrieuChungBenhDTO> GetAllTrieuChungActive(Guid matrieuchung);
+        //  List<TrieuChungBenhDTO> GetAllBenhByType(List<string> matrieuchung);
     }
 }

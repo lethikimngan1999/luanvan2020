@@ -17,7 +17,7 @@
         [Column(Order = 1)]
         public Guid MaTrieuChung { get; set; }
 
-     
+      
         public virtual Benh Benh { get; set; }
 
         public virtual TrieuChung TrieuChung { get; set; }

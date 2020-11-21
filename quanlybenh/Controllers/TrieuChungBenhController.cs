@@ -46,10 +46,10 @@ namespace quanlybenh.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetAllTrieuChung")]
 
-        public async Task<BaseResponse<List<TrieuChungBenhDTO>>> GetAllTrieuChung(string matrieuchung)
+        public async Task<BaseResponse<List<TrieuChungBenhDTO>>> GetAllTrieuChung(List<SearchDTO> matrieuchung)
         {
             try
             {
@@ -66,6 +66,48 @@ namespace quanlybenh.Controllers
                 return await Task.FromResult(new BaseResponse<List<TrieuChungBenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
             }
         }
+
+        //[HttpGet]
+        //[Route("GetAllTrieuChungActive")]
+
+        //public async Task<BaseResponse<List<TrieuChungBenhDTO>>> GetAllTrieuChungActive(Guid matrieuchung)
+        //{
+        //    try
+        //    {
+        //        var result = _trieuchungbenhService.GetAllTrieuChungActive(matrieuchung);
+        //        if (result != null)
+        //        {
+        //            return await Task.FromResult(new BaseResponse<List<TrieuChungBenhDTO>>(result, true)).ConfigureAwait(false);
+        //        }
+
+        //        return await Task.FromResult(new BaseResponse<List<TrieuChungBenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+        //    }
+        //    catch
+        //    {
+        //        return await Task.FromResult(new BaseResponse<List<TrieuChungBenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+        //    }
+        //}
+
+        //[HttpGet]
+        //[Route("GetAllBenhByType")]
+
+        //public async Task<BaseResponse<List<BenhDTO>>> GetAllBenhByType(string matrieuchung)
+        //{
+        //    try
+        //    {
+        //        var result = _trieuchungbenhService.GetAllBenhByType(matrieuchung);
+        //        if (result != null)
+        //        {
+        //            return await Task.FromResult(new BaseResponse<List<BenhDTO>>(result, true)).ConfigureAwait(false);
+        //        }
+
+        //        return await Task.FromResult(new BaseResponse<List<BenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+        //    }
+        //    catch
+        //    {
+        //        return await Task.FromResult(new BaseResponse<List<BenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+        //    }
+        //}
 
         //[HttpGet]
         //[Route("GetTrieuChungOfBenh")]

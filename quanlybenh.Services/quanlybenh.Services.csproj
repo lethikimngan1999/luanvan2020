@@ -109,6 +109,7 @@
     <Compile Include="DTO\Base\BaseTableDTO.cs" />
     <Compile Include="DTO\Benh\BenhDTO.cs" />
     <Compile Include="DTO\Benh\LieuTrinhDTO.cs" />
+    <Compile Include="DTO\Benh\SearchDTO.cs" />
     <Compile Include="DTO\Benh\ThuocDieuTriBenhDTO.cs" />
     <Compile Include="DTO\Benh\ThuocDTO.cs" />
     <Compile Include="DTO\Benh\TrieuChungBenhDTO.cs" />

@@ -14,5 +14,6 @@ namespace quanlybenh.Services.DTO.Benh
         public BenhDTO Benh { get; set; }
 
         public TrieuChungDTO TrieuChung { get; set; }
+        public IEnumerable<string> MaTrieuChungs { get; set; }
     }
 }
