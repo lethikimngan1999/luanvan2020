@@ -189,26 +189,17 @@ namespace quanlybenh.Services.Implementation
                     }
 
 
-                    //if (sql.Count() > sql1.Count())
-                    //{
-                    //      sql = sql.Intersect(sql1);
-                    //}
-                    //else
-                    //{
-                    //    sql = sql.Intersect(sql1);
-                    //}
                 }
-                //sql = sql1.Intersect(sql);
                 foreach (var b in sql)
                     {
-
-                        entities.Add(new TrieuChungBenhDTO { MaBenh = b.MaBenh, MaTrieuChung = b.MaTrieuChung });
+                    entities.Add(new TrieuChungBenhDTO { MaBenh = b.MaBenh, MaTrieuChung = b.MaTrieuChung });
+                    foreach (var item in entities)
+                    {
+                        var benh = _benhService.GetById(item.MaBenh.ToString());
+                        item.Benh = _mapper.Map<BenhDTO>(benh);
 
                     }
-                
-               
-
-
+                }
                 //var lstTrieuChungs = _trieuchungRepository.GetAll();
                 //var lstTrieuChungBenhs = _trieuchungbenhRepository.GetAll();
                 //var lstBenhs = _benhRepository.GetAll();
@@ -222,10 +213,6 @@ namespace quanlybenh.Services.Implementation
 
             }
 
-
-
-
-
             //    var lstTrieuChungs = _trieuchungRepository.GetAll();
             //var lstTrieuChungBenhs = _trieuchungbenhRepository.GetAll();
             //var sql = from trieuchungbenh in lstTrieuChungBenhs
@@ -235,7 +222,6 @@ namespace quanlybenh.Services.Implementation
             //entities = sql.OrderByDescending(c => c.MaBenh).ToList();
             // }
             return entities.ToList();
-
         }
 
         //public List<TrieuChungBenhDTO> GetAllTrieuChungActive( Guid matrieuchung)
