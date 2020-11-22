@@ -29,6 +29,9 @@ namespace quanlybenh.Services.DTO.Ca
 
         public string Tuoi { get; set; }
 
+        public bool? TinhTrang { get; set; }
+
+
         public BienTheDTO BienThes { get; set; }
 
         public List<HinhAnhCaDTO> Listhacas { get; set; }

@@ -3,9 +3,6 @@ using quanlybenh.Services.DTO.Ca;
 using quanlybenh.Services.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using static quanlybenh.Utilities.Configurations.Constants;
@@ -23,11 +20,8 @@ namespace quanlybenh.Controllers
             _caService = caService;
         }
 
-
-
         [HttpGet]
         [Route("GetAll")]
-
         public async Task<BaseResponse<List<CaDTO>>> GetAll()
         {
             try
@@ -44,5 +38,42 @@ namespace quanlybenh.Controllers
                 return await Task.FromResult(new BaseResponse<List<CaDTO>>(Message.GetDataNotSuccess));
             }
         }
+
+        [HttpPost]
+        public async Task<BaseResponse> InsertAll(CaDTO entity)
+        {
+            try
+            {
+                var result = _caService.Create(entity);
+                if (result)
+                {
+                    return await Task.FromResult(new BaseResponse(result));
+                }
+                return await Task.FromResult(new BaseResponse(Message.CreateNotSuccess));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(new BaseResponse(Message.CreateNotSuccess));
+            }
+        }
+
+        [HttpPut]
+        public async Task<BaseResponse> Update(CaDTO caDTO)
+        {
+            try
+            {
+                var result = _caService.Update(caDTO);
+                if (result)
+                {
+                    return await Task.FromResult(new BaseResponse(result));
+                }
+                return await Task.FromResult(new BaseResponse(Message.UpdateNotSuccess, false)).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(new BaseResponse(Message.UpdateNotSuccess, false)).ConfigureAwait(false);
+            }
+        }
+
     }
 }

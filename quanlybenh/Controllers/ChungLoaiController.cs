@@ -25,7 +25,6 @@ namespace quanlybenh.Controllers
 
         [HttpGet]
         [Route("GetAll")]
-
         public async Task<BaseResponse<List<ChungLoaiDTO>>> GetAll()
         {
             try
@@ -45,7 +44,6 @@ namespace quanlybenh.Controllers
 
         [HttpGet]
         [Route("GetById")]
-
         public async Task<BaseResponse<ChungLoaiDTO>> GetById(string machungloai)
         {
             try
@@ -63,9 +61,7 @@ namespace quanlybenh.Controllers
             }
         }
 
-
         [HttpPost]
-
         public async Task<BaseResponse> Create(ChungLoaiDTO chungloaiDto)
         {
             try
@@ -84,7 +80,6 @@ namespace quanlybenh.Controllers
         }
 
         [HttpPut]
-
         public async Task<BaseResponse> Update(ChungLoaiDTO chungloaiDto)
         {
             try

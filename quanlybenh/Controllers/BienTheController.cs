@@ -23,11 +23,8 @@ namespace quanlybenh.Controllers
             _bientheService = bientheService;
         }
 
-
-
         [HttpGet]
         [Route("GetAll")]
-
         public async Task<BaseResponse<List<BienTheDTO>>> GetAll()
         {
             try
@@ -67,7 +64,6 @@ namespace quanlybenh.Controllers
 
         [HttpGet]
         [Route("GetListAll")]
-
         public async Task<BaseResponse<List<BienTheDTO>>> GetListAll()
         {
             try
@@ -87,7 +83,6 @@ namespace quanlybenh.Controllers
 
         [HttpGet]
         [Route("GetListOfChungLoai")]
-
         public async Task<BaseResponse<List<BienTheDTO>>> GetListOfChungLoai(string machungloai)
         {
             try
@@ -124,10 +119,7 @@ namespace quanlybenh.Controllers
             }
         }
 
-
-
         [HttpPut]
-
         public async Task<BaseResponse> Update(BienTheDTO bientheDTO)
         {
             try

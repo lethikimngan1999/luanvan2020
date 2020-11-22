@@ -115,7 +115,6 @@ namespace quanlybenh.Services.Implementation
 
         public bool Update(BienTheDTO bientheDto)
         {
-
             try
             {
                 var bienthe = _bientheRepository.GetById(bientheDto.MaBienThe);
@@ -299,8 +298,6 @@ namespace quanlybenh.Services.Implementation
                         {
                             item.Mahas = ha.DuongDan;
                         }
-
-
                     }
                 }
                 return bientheDto;

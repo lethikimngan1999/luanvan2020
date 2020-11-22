@@ -66,5 +66,75 @@ namespace quanlybenh.Services.Implementation
 
             return caDtos;
         }
+
+        public bool Create(CaDTO caDto)
+        {
+            try
+            {
+                var ca = new Ca
+                {
+                    MaCa = Guid.NewGuid(),
+                    MaBienThe = caDto.MaBienThe,
+                    TenCa = caDto.TenCa,
+                    GioiTinh = Convert.ToInt32(caDto.GioiTinh),
+                    NgaySinh = caDto.NgaySinh,
+                    KichThuoc = caDto.KichThuoc,
+                    NgayDo = caDto.NgayDo,
+                    DonGia = Convert.ToDouble(caDto.DonGia),
+                    Tuoi = caDto.Tuoi,
+                    TinhTrang = Convert.ToBoolean(caDto.TinhTrang)
+                };
+                _caRepository.Insert(ca);
+                _unitOfWork.Commit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool Update(CaDTO caDto)
+        {
+            try
+            {
+                var ca = _caRepository.GetById(caDto.MaCa);
+                if (ca == null)
+                {
+                    return false;
+                }
+                // Update chi tiet 
+                ca.MaCa = caDto.MaCa;
+                ca.MaBienThe = caDto.MaBienThe;
+                ca.TenCa = caDto.TenCa;
+                ca.GioiTinh = Convert.ToInt32(caDto.GioiTinh);
+                ca.NgaySinh = caDto.NgaySinh;
+                ca.KichThuoc = caDto.KichThuoc;
+                ca.NgayDo = caDto.NgayDo;
+                ca.DonGia = Convert.ToDouble(caDto.DonGia);
+                ca.Tuoi = caDto.Tuoi;
+                ca.TinhTrang = Convert.ToBoolean(caDto.TinhTrang);
+                //update thuốc điều trị
+                //var thuocdieutriOld = _thuocdieutriRepository.GetMany(p => p.MaBenh == benh.MaBenh).ToList();
+                //_thuocdieutriRepository.RemoveMultiple(thuocdieutriOld);
+
+                //var thuocs = _thuocRepository.GetMany(r => benhDto.MaThuocs.Contains(r.MaThuoc.ToString()));
+                //foreach (var thuoc in thuocs)
+                //{
+                //    var thuocdieutri = new ThuocDieuTri { MaBenh = benh.MaBenh, MaThuoc = thuoc.MaThuoc };
+
+                //    _thuocdieutriRepository.Insert(thuocdieutri);
+                //}
+                // update user
+                _caRepository.Update(ca);
+                _unitOfWork.Commit();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
+

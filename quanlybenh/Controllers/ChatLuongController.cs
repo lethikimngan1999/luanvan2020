@@ -25,7 +25,6 @@ namespace quanlybenh.Controllers
 
         [HttpGet]
         [Route("GetAll")]
-
         public async Task<BaseResponse<List<ChatLuongDTO>>> GetAll()
         {
             try

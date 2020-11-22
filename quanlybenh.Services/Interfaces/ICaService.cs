@@ -9,6 +9,8 @@ namespace quanlybenh.Services.Interfaces
 {
    public interface ICaService
     {
+        bool Create(CaDTO caDto);
+        bool Update(CaDTO caDto);
         List<CaDTO> GetAll();
     }
 }
