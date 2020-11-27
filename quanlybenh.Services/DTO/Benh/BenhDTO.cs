@@ -19,6 +19,7 @@ namespace quanlybenh.Services.DTO.Benh
 
         public string MoTa { get; set; }
         public string HinhAnh { get; set; }
+ 
         public List<ThuocDTO> ListThuocs { get; set; }
         public IEnumerable<string> MaThuocs { get; set; }
 

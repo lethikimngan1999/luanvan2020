@@ -53,7 +53,8 @@ namespace quanlybenh.Services.Implementation
                     NguyenNhan = benhDto.NguyenNhan,
                     CachDieuTri = benhDto.CachDieuTri,
                     MoTa = benhDto.MoTa,
-                    HinhAnh = benhDto.HinhAnh
+                    HinhAnh = benhDto.HinhAnh,
+                 
                 };
                 _benhRepository.Insert(benh);
                 _unitOfWork.Commit();
@@ -199,8 +200,8 @@ namespace quanlybenh.Services.Implementation
                 NguyenNhan = userRoleDataPopups.NguyenNhan,
                 CachDieuTri = userRoleDataPopups.CachDieuTri,
                 MoTa = userRoleDataPopups.MoTa,
-                HinhAnh = userRoleDataPopups.HinhAnh
-
+                HinhAnh = userRoleDataPopups.HinhAnh,
+        
             };
             _benhRepository.Insert(benh);
             _unitOfWork.Commit();
@@ -291,6 +292,7 @@ namespace quanlybenh.Services.Implementation
                 benh.CachDieuTri = benhDto.CachDieuTri;
                 benh.MoTa = benhDto.MoTa;
                 benh.HinhAnh = benhDto.HinhAnh;
+
                 //update thuốc điều trị
                 var thuocdieutriOld = _thuocdieutriRepository.GetMany(p => p.MaBenh == benh.MaBenh).ToList();
                 _thuocdieutriRepository.RemoveMultiple(thuocdieutriOld);

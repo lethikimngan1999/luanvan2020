@@ -49,21 +49,21 @@ namespace quanlybenh.Controllers
         [HttpPost]
         [Route("GetAllTrieuChung")]
 
-        public async Task<BaseResponse<List<TrieuChungBenhDTO>>> GetAllTrieuChung(List<SearchDTO> matrieuchung)
+        public async Task<BaseResponse<List<BenhDTO>>> GetAllTrieuChung(List<SearchDTO> matrieuchung)
         {
             try
             {
                 var result = _trieuchungbenhService.GetAllTRieuChungBenhByType(matrieuchung);
                 if (result != null)
                 {
-                    return await Task.FromResult(new BaseResponse<List<TrieuChungBenhDTO>>(result, true)).ConfigureAwait(false);
+                    return await Task.FromResult(new BaseResponse<List<BenhDTO>>(result, true)).ConfigureAwait(false);
                 }
 
-                return await Task.FromResult(new BaseResponse<List<TrieuChungBenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+                return await Task.FromResult(new BaseResponse<List<BenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
             }
             catch
             {
-                return await Task.FromResult(new BaseResponse<List<TrieuChungBenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+                return await Task.FromResult(new BaseResponse<List<BenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
             }
         }
 

@@ -29,7 +29,7 @@ namespace quanlybenh.DataModels.Entities
 
         public string MoTa { get; set; }
         public string HinhAnh { get; set; }
-
+       
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThuocDieuTri> ThuocDieuTris { get; set; }
