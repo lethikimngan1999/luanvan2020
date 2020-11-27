@@ -12,7 +12,7 @@ namespace quanlybenh.Services.DTO.Benh
 
         public Guid MaThuoc { get; set; }
 
-  
+        public int? STT { get; set; }
         public string TenLieuTrinh { get; set; }
 
         public string MoTaLieuTrinh { get; set; }

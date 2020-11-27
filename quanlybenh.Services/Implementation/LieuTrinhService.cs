@@ -52,7 +52,8 @@ namespace quanlybenh.Services.Implementation
                     MaLieuTrinh = Guid.NewGuid(),
                     TenLieuTrinh = lieutrinhDto.TenLieuTrinh,
                     MoTaLieuTrinh = lieutrinhDto.MoTaLieuTrinh,
-                    MaThuoc = lieutrinhDto.MaThuoc
+                    MaThuoc = lieutrinhDto.MaThuoc,
+                      STT = Convert.ToInt32(lieutrinhDto.STT)
                 };
 
                 _lieutrinhRepository.Insert(lieutrinh);
@@ -68,7 +69,7 @@ namespace quanlybenh.Services.Implementation
 
         public List<LieuTrinhDTO> GetAll()
         {
-            var _lstLieuTrinhs = _lieutrinhRepository.GetAll().OrderBy(x => x.TenLieuTrinh).ToList();
+            var _lstLieuTrinhs = _lieutrinhRepository.GetAll().OrderBy(x => x.STT).ToList();
             var lieutrinhDtos = _mapper.Map<List<LieuTrinhDTO>>(_lstLieuTrinhs);
 
             foreach (var item in lieutrinhDtos)
@@ -110,7 +111,7 @@ namespace quanlybenh.Services.Implementation
                 lieutrinh.MaLieuTrinh = lieutrinhDto.MaLieuTrinh;
                 lieutrinh.TenLieuTrinh = lieutrinhDto.TenLieuTrinh;
                 lieutrinh.MoTaLieuTrinh = lieutrinhDto.MoTaLieuTrinh;
-
+                lieutrinh.STT = Convert.ToInt32(lieutrinhDto.STT);
                 lieutrinh.MaThuoc = lieutrinhDto.MaThuoc;
               
 

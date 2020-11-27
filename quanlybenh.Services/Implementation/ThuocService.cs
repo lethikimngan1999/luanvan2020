@@ -141,7 +141,7 @@ namespace quanlybenh.Services.Implementation
                 thuocDto.MaBenhs = _lstThuocDieuTris.Where(p => p.MaThuoc == thuocDto.MaThuoc)?.Select(p => p.MaBenh.ToString());
 
                 // list liệu trình
-                var _lstLieuTrinhs = _lieutrinhRepository.GetMany(p => p.MaThuoc == thuocDto.MaThuoc).ToList();
+                var _lstLieuTrinhs = _lieutrinhRepository.GetMany(p => p.MaThuoc == thuocDto.MaThuoc).OrderBy(x => x.STT).ToList();
                 thuocDto.ListLieuTrinhs = _mapper.Map<List<LieuTrinhDTO>>(_lstLieuTrinhs);
                 thuocDto.MaLieuTrinhs = _lstLieuTrinhs.Where(p => p.MaThuoc == thuocDto.MaThuoc)?.Select(p => p.MaLieuTrinh.ToString());
 

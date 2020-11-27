@@ -16,7 +16,7 @@ namespace quanlybenh.DataModels.Entities
 
         [StringLength(255)]
         public string TenLieuTrinh { get; set; }
-
+        public int? STT { get; set; }
         public string MoTaLieuTrinh { get; set; }
 
         public virtual Thuoc Thuoc { get; set; }
