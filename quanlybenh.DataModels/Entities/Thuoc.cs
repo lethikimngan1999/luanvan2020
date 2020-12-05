@@ -9,7 +9,6 @@ namespace quanlybenh.DataModels.Entities
     [Table("Thuoc")]
     public partial class Thuoc
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Thuoc()
         {
             LieuTrinhs = new HashSet<LieuTrinh>();
@@ -28,11 +27,9 @@ namespace quanlybenh.DataModels.Entities
 
         public string LuuY { get; set; }
         public string HinhAnh { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public string LieuDung { get; set; }
+        
         public virtual ICollection<ThuocDieuTri> ThuocDieuTris { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LieuTrinh> LieuTrinhs { get; set; }
     }
 }

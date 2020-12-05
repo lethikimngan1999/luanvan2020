@@ -122,6 +122,7 @@
     <Compile Include="Entities\NoiCungCap.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\RolePermission.cs" />
+    <Compile Include="Entities\TheoDoiThongTin.cs" />
     <Compile Include="Entities\Thuoc.cs" />
     <Compile Include="Entities\ThuocDieuTri.cs" />
     <Compile Include="Entities\TrieuChung.cs" />

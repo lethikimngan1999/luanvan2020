@@ -9,11 +9,13 @@ namespace quanlybenh.DataModels.Entities
     [Table("KhachHang")]
     public partial class KhachHang
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+       
         public KhachHang()
         {
             DatHangs = new HashSet<DatHang>();
             HoaDonXuats = new HashSet<HoaDonXuat>();
+            TheoDoiThongTins = new HashSet<TheoDoiThongTin>();
+            Users = new HashSet<User>();
         }
 
         [Key]
@@ -39,10 +41,9 @@ namespace quanlybenh.DataModels.Entities
 
         public string GhiChu { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DatHang> DatHangs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDonXuat> HoaDonXuats { get; set; }
+        public virtual ICollection<TheoDoiThongTin> TheoDoiThongTins { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

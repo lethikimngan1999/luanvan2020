@@ -35,6 +35,7 @@ namespace quanlybenh.DataModels.Entities
         public virtual DbSet<HoaDonChiTiet> HoaDonChiTiets { get; set; }
         public virtual DbSet<HoaDonXuat> HoaDonXuats { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
+        public virtual DbSet<TheoDoiThongTin> TheoDoiThongTins { get; set; }
         public virtual DbSet<LieuTrinh> LieuTrinhs { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
@@ -135,6 +136,16 @@ namespace quanlybenh.DataModels.Entities
 
             modelBuilder.Entity<KhachHang>()
                 .HasMany(e => e.HoaDonXuats)
+                .WithRequired(e => e.KhachHang)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<KhachHang>()
+              .HasMany(e => e.TheoDoiThongTins)
+              .WithRequired(e => e.KhachHang)
+              .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<KhachHang>()
+                .HasMany(e => e.Users)
                 .WithRequired(e => e.KhachHang)
                 .WillCascadeOnDelete(false);
 

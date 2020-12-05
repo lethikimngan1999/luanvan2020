@@ -11,7 +11,7 @@ namespace quanlybenh.Services.DTO.Benh
         public Guid MaThuoc { get; set; }
         public Guid MaBenh { get; set; }
 
-        public string LieuDung { get; set; }
+  
 
         public string MoTa { get; set; }
 

@@ -64,7 +64,7 @@ namespace quanlybenh.Services.Implementation
                 {
                     var thuocdieutriDto = thuocdieutriDtos.Where(p => p.MaThuoc == item.MaThuoc).FirstOrDefault();
                     var thuocdieutri = _mapper.Map<ThuocDieuTri>(thuocdieutriDto);
-                    thuocdieutri.LieuDung = thuocdieutriDto.LieuDung;
+                   
                     thuocdieutri.MoTa = thuocdieutriDto.MoTa;
                     _thuocdieutriRepository.Insert(thuocdieutri);
                 }
@@ -135,7 +135,7 @@ namespace quanlybenh.Services.Implementation
                 {
                     var thuocdieutriDto = thuocdieutriDtos.Where(p => p.MaBenh == item.MaBenh).FirstOrDefault();
                     var thuocdieutri = _mapper.Map<ThuocDieuTri>(thuocdieutriDto);
-                    thuocdieutri.LieuDung = thuocdieutriDto.LieuDung;
+                   
                     thuocdieutri.MoTa = thuocdieutriDto.MoTa;
                     _thuocdieutriRepository.Insert(thuocdieutri);
                 }

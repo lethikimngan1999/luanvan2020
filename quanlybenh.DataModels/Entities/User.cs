@@ -13,7 +13,6 @@ namespace quanlybenh.DataModels.Entities
     [Table("User")]
     public class User : IdentityUser<Guid, IdentityUserLogin<Guid>, IdentityUserRole<Guid>, IdentityUserClaim<Guid>>, IBaseEntity
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
             DonNhaps = new HashSet<DonNhap>();
@@ -22,8 +21,9 @@ namespace quanlybenh.DataModels.Entities
         }
 
         public Guid MaNhanVien { get; set; }
+        public Guid MaKhachHang { get; set; }
 
-   
+        public Guid? CustomerId { get; set; }
 
         [StringLength(128)]
         public string CreatedBy { get; set; }
@@ -44,8 +44,8 @@ namespace quanlybenh.DataModels.Entities
         public virtual ICollection<HoaDonXuat> HoaDonXuats { get; set; }
 
         public virtual NhanVien NhanVien { get; set; }
+        public virtual KhachHang KhachHang { get; set; }
 
-  
         public virtual ICollection<UserRole> UserRoles { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, Guid> manager)

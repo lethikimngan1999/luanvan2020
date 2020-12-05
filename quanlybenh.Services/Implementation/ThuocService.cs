@@ -61,7 +61,8 @@ namespace quanlybenh.Services.Implementation
                     CongDung = thuocDto.CongDung,
                     CachDung = thuocDto.CachDung,
                     HinhAnh = thuocDto.HinhAnh,
-                    LuuY = thuocDto.LuuY
+                    LuuY = thuocDto.LuuY,
+                   LieuDung = thuocDto.LieuDung
                 };
                 _thuocRepository.Insert(thuoc);
                 _unitOfWork.Commit();
@@ -168,6 +169,7 @@ namespace quanlybenh.Services.Implementation
                 thuoc.CachDung = thuocDto.CachDung;
                 thuoc.HinhAnh = thuocDto.HinhAnh;
                 thuoc.LuuY = thuocDto.LuuY;
+                thuoc.LieuDung = thuocDto.LieuDung;
                 //update thuốc điều trị
                 var thuocdieutriOld = _thuocdieutriRepository.GetMany(p => p.MaThuoc == thuoc.MaThuoc).ToList();
                 _thuocdieutriRepository.RemoveMultiple(thuocdieutriOld);

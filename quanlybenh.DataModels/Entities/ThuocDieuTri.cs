@@ -17,8 +17,7 @@ namespace quanlybenh.DataModels.Entities
         [Column(Order = 1)]
         public Guid MaBenh { get; set; }
 
-        public string LieuDung { get; set; }
-
+ 
         public string MoTa { get; set; }
 
         public virtual Benh Benh { get; set; }
