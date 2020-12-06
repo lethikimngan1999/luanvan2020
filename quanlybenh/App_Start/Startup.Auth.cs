@@ -1,13 +1,9 @@
 ﻿using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Jwt;
 using Owin;
-using quanlybenh.Utilities.Configurations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
 using System.Web.Http;
+using System.Text;
+using quanlybenh.Utilities.Configurations;
 
 namespace quanlybenh.App_Start
 {

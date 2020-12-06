@@ -55,24 +55,24 @@ namespace quanlybenh.Services.Implementation
                     return null;
                 }
                 var userDto = _mapper.Map<UserDTO>(user);
-                ////get thong tin nhan vien
-                //var nhanvien = _nhanvienRepository.GetById(userDto.MaNhanVien);
-                //userDto.Nhanvien = _mapper.Map<NhanVienDTO>(nhanvien);
+                //get thong tin nhan vien
+                var employee = _nhanvienRepository.GetById(userDto.MaNhanVien);
+                userDto.Nhanvien = _mapper.Map<NhanVienDTO>(employee);
 
-                //// get danh sach vai tro user
+                // get danh sach vai tro user
 
-                //var _lstUserRoles = _userRoleRepository.GetMany(p => p.UserId == user.Id).ToList();
-                //var _lstRoles = _roleRepository.GetAll().ToList();
+                var _lstUserRoles = _userRoleRepository.GetMany(p => p.UserId == user.Id).ToList();
+                var _lstRoles = _roleRepository.GetAll().ToList();
 
-                //var sql = from role in _lstRoles
-                //          join userRole in _lstUserRoles on role.Id equals userRole.RoleId
-                //          select role;
+                var sql = from role in _lstRoles
+                          join userRole in _lstUserRoles on role.Id equals userRole.RoleId
+                          select role;
 
-                //var entities = sql.OrderByDescending(c => c.Name).ToList();
-                //userDto.ListRoles = _mapper.Map<List<RoleDTO>>(entities);
+                var entities = sql.OrderByDescending(c => c.Name).ToList();
+                userDto.ListRoles = _mapper.Map<List<RoleDTO>>(entities);
 
-                //// get userRole
-                //userDto.RoleIds = _lstUserRoles.Where(p => p.UserId == user.Id)?.Select(p => p.RoleId.ToString());
+                // get userRole
+                userDto.RoleIds = _lstUserRoles.Where(p => p.UserId == user.Id)?.Select(p => p.RoleId.ToString());
 
                 return userDto;
 

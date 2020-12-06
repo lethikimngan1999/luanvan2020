@@ -31,11 +31,11 @@ namespace quanlybenh.Controllers
                 {
                     return await Task.FromResult(new BaseResponse<List<CaDTO>>(result));
                 }
-                return await Task.FromResult(new BaseResponse<List<CaDTO>>(Message.GetDataNotSuccess));
+                return await Task.FromResult(new BaseResponse<List<CaDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
             }
             catch (Exception e)
             {
-                return await Task.FromResult(new BaseResponse<List<CaDTO>>(Message.GetDataNotSuccess));
+                return await Task.FromResult(new BaseResponse<List<CaDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
             }
         }
 

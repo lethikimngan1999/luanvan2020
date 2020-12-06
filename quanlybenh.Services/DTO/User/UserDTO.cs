@@ -18,9 +18,10 @@ namespace quanlybenh.Services.DTO.User
         public string PasswordHash { get; set; }
 
         public Guid MaNhanVien { get; set; }
-    
+        public Guid MaKhachHang { get; set; }
         public string Status { get; set; }
         public virtual NhanVienDTO Nhanvien { get; set; }
+    
         public List<RoleDTO> ListRoles { get; set; }
         public IEnumerable<string> RoleIds { get; set; }
     }

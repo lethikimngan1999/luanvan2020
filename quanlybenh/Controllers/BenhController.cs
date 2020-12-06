@@ -76,13 +76,13 @@ namespace quanlybenh.Controllers
                 var result = _benhService.GetAll();
                 if (result != null)
                 {
-                    return await Task.FromResult(new BaseResponse<List<BenhDTO>>(result));
+                    return await Task.FromResult(new BaseResponse<List<BenhDTO>>(result)).ConfigureAwait(true);
                 }
-                return await Task.FromResult(new BaseResponse<List<BenhDTO>>(Message.GetDataNotSuccess));
+                return await Task.FromResult(new BaseResponse<List<BenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(true);
             }
             catch (Exception e)
             {
-                return await Task.FromResult(new BaseResponse<List<BenhDTO>>(Message.GetDataNotSuccess));
+                return await Task.FromResult(new BaseResponse<List<BenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(true);
             }
         }
 

@@ -37,11 +37,11 @@ namespace quanlybenh.Controllers
                 {
                     return await Task.FromResult(new BaseResponse<List<TrieuChungDTO>>(result));
                 }
-                return await Task.FromResult(new BaseResponse<List<TrieuChungDTO>>(Message.GetDataNotSuccess));
+                return await Task.FromResult(new BaseResponse<List<TrieuChungDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
             }
             catch (Exception e)
             {
-                return await Task.FromResult(new BaseResponse<List<TrieuChungDTO>>(Message.GetDataNotSuccess));
+                return await Task.FromResult(new BaseResponse<List<TrieuChungDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
             }
         }
 

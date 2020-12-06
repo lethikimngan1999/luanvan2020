@@ -211,14 +211,16 @@ namespace quanlybenh.DataModels.Entities
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.UserRoles)
-                .WithRequired(e => e.User)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.UserRoles)
+            //    .WithRequired(e => e.User)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserRole>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
