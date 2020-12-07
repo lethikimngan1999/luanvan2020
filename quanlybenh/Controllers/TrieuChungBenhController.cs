@@ -67,6 +67,27 @@ namespace quanlybenh.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("GetAllBenhLienQuan")]
+
+        public async Task<BaseResponse<List<BenhDTO>>> GetAllBenhLienQuan(List<SearchDTO> matrieuchung)
+        {
+            try
+            {
+                var result = _trieuchungbenhService.GetAllBenhLienQuan(matrieuchung);
+                if (result != null)
+                {
+                    return await Task.FromResult(new BaseResponse<List<BenhDTO>>(result, true)).ConfigureAwait(false);
+                }
+
+                return await Task.FromResult(new BaseResponse<List<BenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+            }
+            catch
+            {
+                return await Task.FromResult(new BaseResponse<List<BenhDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+            }
+        }
+
         //[HttpGet]
         //[Route("GetAllTrieuChungActive")]
 
