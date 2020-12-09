@@ -22,6 +22,6 @@ namespace quanlybenh.DataModels.Entities
 
         public virtual Role Role { get; set; }
 
-      //  public virtual User User { get; set; }
+       public virtual User User { get; set; }
     }
 }

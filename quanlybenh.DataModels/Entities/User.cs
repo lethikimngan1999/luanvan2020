@@ -13,14 +13,14 @@ namespace quanlybenh.DataModels.Entities
     [Table("User")]
     public class User : IdentityUser<Guid, IdentityUserLogin<Guid>, IdentityUserRole<Guid>, IdentityUserClaim<Guid>>, IBaseEntity
     {
-        //public User()
-        //{
-        //    DonNhaps = new HashSet<DonNhap>();
-        //    HoaDonXuats = new HashSet<HoaDonXuat>();
-        //    UserRoles = new HashSet<UserRole>();
-        //}
+        public User()
+        {
+            DonNhaps = new HashSet<DonNhap>();
+            HoaDonXuats = new HashSet<HoaDonXuat>();
+            UserRoles = new HashSet<UserRole>();
+        }
 
-        public Guid MaNhanVien { get; set; }
+        public Guid? MaNhanVien { get; set; }
         public Guid? MaKhachHang { get; set; }
 
 

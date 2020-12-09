@@ -1,4 +1,5 @@
-﻿using quanlybenh.Services.DTO.User;
+﻿using quanlybenh.Services.DTO.TaiKhoanKhachHang;
+using quanlybenh.Services.DTO.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace quanlybenh.Services.Interfaces
         UserDTO GetByUserName(string username);
 
         bool CreateNhanVienAccount(UserDTO registerUserDto);
-
+        bool CreateKhachHangAccount(TaiKhoanKhachHangDTO registerUserDto);
         bool Update(UserDTO userDto);
 
         bool Delete(string userId);

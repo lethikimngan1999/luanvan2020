@@ -124,6 +124,7 @@
     <Compile Include="DTO\HinhAnh\HinhAnhCaDTO.cs" />
     <Compile Include="DTO\Menu\MenuDTO.cs" />
     <Compile Include="DTO\NhanVien\NhanVienDTO.cs" />
+    <Compile Include="DTO\TaiKhoanKhachHang\TaiKhoanKhachHangDTO.cs" />
     <Compile Include="DTO\User\ChangePasswordDTO.cs" />
     <Compile Include="DTO\User\LoginDTO.cs" />
     <Compile Include="DTO\User\RoleDTO.cs" />

@@ -1,4 +1,5 @@
 ﻿using quanlybenh.Services.DTO.Base;
+using quanlybenh.Services.DTO.TaiKhoanKhachHang;
 using quanlybenh.Services.DTO.User;
 using quanlybenh.Services.Interfaces;
 using System;
@@ -162,6 +163,26 @@ namespace quanlybenh.Controllers
                 return await Task.FromResult(new BaseResponse(Message.CreateNotSuccess, false)).ConfigureAwait(false);
             }
         }
+
+        [HttpPost]
+        [Route("CreateKhachHangAccount")]
+        public async Task<BaseResponse> CreateKhachHangAccount(TaiKhoanKhachHangDTO userDTO)
+        {
+            try
+            {
+                var result = _userService.CreateKhachHangAccount(userDTO);
+                if (result)
+                {
+                    return await Task.FromResult(new BaseResponse(result));
+                }
+                return await Task.FromResult(new BaseResponse(Message.CreateNotSuccess, false)).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(new BaseResponse(Message.CreateNotSuccess, false)).ConfigureAwait(false);
+            }
+        }
+
 
         [HttpPut]
 

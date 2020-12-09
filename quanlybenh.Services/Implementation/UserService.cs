@@ -3,6 +3,7 @@ using quanlybenh.DataModels.Entities;
 using quanlybenh.DataModels.Repositories;
 using quanlybenh.DataModels.UnitOfWork;
 using quanlybenh.Services.DTO.NhanVien;
+using quanlybenh.Services.DTO.TaiKhoanKhachHang;
 using quanlybenh.Services.DTO.User;
 using quanlybenh.Services.Interfaces;
 using quanlybenh.Utilities.Configurations;
@@ -21,6 +22,7 @@ namespace quanlybenh.Services.Implementation
         private IDataRepository<Role> _roleRepository;
         private IDataRepository<UserRole> _userRoleRepository;
         private IDataRepository<NhanVien> _nhanvienRepository;
+        private IDataRepository<KhachHang> _khachhangRepository;
         private readonly IMapper _mapper;
         private readonly ApplicationUserManager _userManager;
         private INhanVienService _nhanvienService;
@@ -29,6 +31,7 @@ namespace quanlybenh.Services.Implementation
             ApplicationUserManager userManager,
             IDataRepository<User> userRepository,
                    IDataRepository<NhanVien> nhanvienRepository,
+                    IDataRepository<KhachHang> khachhangRepository,
                    IDataRepository<Role> roleRepository,
                    IDataRepository<UserRole> userRoleRepository,
                             INhanVienService nhanvienService,
@@ -39,6 +42,7 @@ namespace quanlybenh.Services.Implementation
             _userRepository = userRepository;
             _nhanvienRepository = nhanvienRepository;
             _nhanvienService = nhanvienService;
+            _khachhangRepository = khachhangRepository;
             _userManager = userManager;
             _mapper = mapper;
             _roleRepository = roleRepository;
@@ -441,6 +445,65 @@ namespace quanlybenh.Services.Implementation
                 user.RoleIds = _lstUserRoles.Where(p => p.UserId == user.Id)?.Select(p => p.RoleId.ToString());
             }
             return userDtos;
+        }
+
+        public bool CreateKhachHangAccount(TaiKhoanKhachHangDTO registerUserDto)
+        {
+            try
+            {
+                //var item = IsExistedUserByMaNhanVien(registerUserDto.MaNhanVien.ToString());
+                //if (item)
+                //{
+                //    return false;
+                //}
+                var khachhang = new KhachHang
+                {
+                    MaKhachHang = Guid.NewGuid(),
+                    HoLot = registerUserDto.HoLot.ToLower(),
+                    TenKhachhang = registerUserDto.TenKhachhang.ToLower(),
+                    DiaChi = registerUserDto.DiaChi.ToLower(),
+                    TinhTP = registerUserDto.TinhTP.ToLower(),
+                    Sdt = registerUserDto.Sdt.ToLower(),
+                    Email = registerUserDto.Email.ToLower(),
+                    GhiChu = registerUserDto.GhiChu.ToLower(),
+                  
+
+                };
+                _khachhangRepository.Insert(khachhang);
+                _unitOfWork.Commit();
+
+                var user = new User
+                {
+                    Id = Guid.NewGuid(),
+                    UserName = registerUserDto.UserName.ToLower(),
+                    PasswordHash = _userManager.PasswordHasher.HashPassword(AppSettings.DefaultPassword),
+                 //   MaNhanVien = new Guid(registerUserDto.MaNhanVien.ToString().ToLower()),
+                    MaKhachHang = new Guid(khachhang.MaKhachHang.ToString().ToLower()),
+                    CreatedBy = registerUserDto.TenKhachhang.ToLower(),
+                    CreatedDate = DateTime.Now,
+                    UpdatedBy = registerUserDto.UpdatedBy,
+                    UpdatedDate = registerUserDto.UpdatedDate,
+                    Status = registerUserDto.Status
+
+                };
+                _userRepository.Insert(user);
+                _unitOfWork.Commit();
+                if (registerUserDto.RoleIds != null)
+                {
+                    foreach (var roleId in registerUserDto.RoleIds)
+                    {
+                        var userRole = new UserRole { UserId = user.Id, RoleId = new Guid(roleId) };
+                        _userRoleRepository.Insert(userRole);
+                    }
+                    _unitOfWork.Commit();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+
+            }
         }
     }
     }
