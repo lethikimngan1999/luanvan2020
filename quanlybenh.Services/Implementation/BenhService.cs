@@ -20,12 +20,14 @@ namespace quanlybenh.Services.Implementation
         private IDataRepository<TrieuChung> _trieuchungRepository;
         private IDataRepository<TrieuChungBenh> _trieuchungbenhRepository;
         private IDataRepository<ThuocDieuTri> _thuocdieutriRepository;
+        private IDataRepository<LieuTrinh> _lieutrinhRepository;
 
         private readonly IMapper _mapper;
 
         public BenhService(
                IDataRepository<Benh> benhRepository,
                IDataRepository<Thuoc> thuocRepository,
+               IDataRepository<LieuTrinh> lieutrinhRepository,
                IDataRepository<TrieuChung> trieuchungRepository,
            IDataRepository<TrieuChungBenh> trieuchungbenhRepository,
                IDataRepository<ThuocDieuTri> thuocdieutriRepository,
@@ -37,6 +39,7 @@ namespace quanlybenh.Services.Implementation
             _trieuchungRepository = trieuchungRepository;
             _trieuchungbenhRepository = trieuchungbenhRepository;
             _thuocdieutriRepository = thuocdieutriRepository;
+            _lieutrinhRepository = lieutrinhRepository;
             _mapper = mapper;
         }
 
@@ -156,7 +159,15 @@ namespace quanlybenh.Services.Implementation
                           join thuocdieutri in _lstThuocDieuTris on thuoc.MaThuoc equals thuocdieutri.MaThuoc
                           select thuoc;
                 entities = sql.OrderByDescending(c => c.TenThuoc).ToList();
+                var _lstLieuTrinhs = _lieutrinhRepository.GetAll().ToList();
                 benhDto.ListThuocs = _mapper.Map<List<ThuocDTO>>(entities);
+                for (int i = 0; i < benhDto.ListThuocs.Count(); i++)
+                {
+                    var list = _lstLieuTrinhs.Where(x => x.MaThuoc == benhDto.ListThuocs[i].MaThuoc).OrderBy(x => x.STT).ToList();
+                  
+                    benhDto.ListThuocs[i].ListLieuTrinhs = _mapper.Map<List<LieuTrinhDTO>>(list);
+                 
+                }
 
                 benhDto.MaThuocs = _lstThuocDieuTris.Where(p => p.MaBenh == benhDto.MaBenh)?.Select(p => p.MaThuoc.ToString());
 
