@@ -476,8 +476,9 @@ namespace quanlybenh.Services.Implementation
                 {
                     Id = Guid.NewGuid(),
                     UserName = registerUserDto.UserName.ToLower(),
-                    PasswordHash = _userManager.PasswordHasher.HashPassword(AppSettings.DefaultPassword),
-                 //   MaNhanVien = new Guid(registerUserDto.MaNhanVien.ToString().ToLower()),
+                    PasswordHash = _userManager.PasswordHasher.HashPassword(registerUserDto.PasswordHash),
+                    //PasswordHash = _userManager.PasswordHasher.HashPassword(AppSettings.DefaultPassword),
+                    //   MaNhanVien = new Guid(registerUserDto.MaNhanVien.ToString().ToLower()),
                     MaKhachHang = new Guid(khachhang.MaKhachHang.ToString().ToLower()),
                     CreatedBy = registerUserDto.TenKhachhang.ToLower(),
                     CreatedDate = DateTime.Now,
