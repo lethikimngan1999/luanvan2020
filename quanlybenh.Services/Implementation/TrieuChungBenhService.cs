@@ -154,10 +154,7 @@ namespace quanlybenh.Services.Implementation
             var lstBenh = _benhRepository.GetAll().ToList();
             int res = 0;
             List<BenhDTO> sql2 = new List<BenhDTO>();
-            //List<BenhDTO> sql3 = new List<BenhDTO>();
-            //List<BenhDTO> sql4 = new List<BenhDTO>();
-            //if (!string.IsNullOrEmpty(searchString))
-            //{
+          
             if (searchString.Count() > 0)
             {     
                 foreach (var a in searchString)
@@ -176,40 +173,6 @@ namespace quanlybenh.Services.Implementation
                    .Select(grp => grp.First())
                    .ToList();
 
-            //sql3 = sql2.GroupBy(test => test.MaBenh)
-            //       .Select(grp => grp.First())
-            //       .ToList();
-            //for (int i = 0; i < sql3.Count(); i++)
-            //{
-            //    var list = lstTrieuChungBenhs.Where(x => x.MaBenh == sql3[i].MaBenh).ToList();
-            //    res = 0;
-            //    for (int j = 0; j < list.Count(); j++)
-            //    {
-            //        for (int p = 0; p < searchString.Count(); p++)
-            //        {
-            //            if (list[j].MaTrieuChung != searchString[p].search)
-            //            {
-            //                res++;
-            //                break;
-            //            }
-            //        }
-            //        if (res != searchString.Count())
-            //        {
-            //            var benh = lstBenh.SingleOrDefault(x => x.MaBenh == sql3[i].MaBenh);
-            //            sql4.Add(new BenhDTO
-            //            {
-            //                MaBenh = benh.MaBenh,
-            //                TenBenh = benh.TenBenh,
-            //                HinhAnh = benh.HinhAnh,
-            //                NguyenNhan = benh.NguyenNhan,
-                          
-            //            });
-            //        }
-            //    }
-            //}
-            //sql4 = sql4.GroupBy(test => test.MaBenh)
-            //      .Select(grp => grp.First())
-            //      .ToList();
    
             for (int i = 0; i < sql2.Count(); i++)
                 {
@@ -234,7 +197,7 @@ namespace quanlybenh.Services.Implementation
                             TenBenh = benh.TenBenh,
                             HinhAnh = benh.HinhAnh,
                             NguyenNhan = benh.NguyenNhan,
-                           // ListBenhs = _mapper.Map<List<BenhDTO>>(sql4)
+                          
                     });
                         }
                     }
@@ -281,7 +244,6 @@ namespace quanlybenh.Services.Implementation
             //  return entities.Distinct().ToList();
 
         }
-
         public List<BenhDTO> GetAllBenhLienQuan(List<SearchDTO> searchString)
         {
             var entities = new List<BenhDTO>();
@@ -333,8 +295,8 @@ namespace quanlybenh.Services.Implementation
                             MaBenh = benh.MaBenh,
                             TenBenh = benh.TenBenh,
                             HinhAnh = benh.HinhAnh,
-                            NguyenNhan = benh.NguyenNhan,
-                            // ListBenhs = _mapper.Map<List<BenhDTO>>(sql4)
+                            NguyenNhan = "Active",
+                           
                         });
                     }
                 }
@@ -369,7 +331,7 @@ namespace quanlybenh.Services.Implementation
                             MaBenh = benh.MaBenh,
                             TenBenh = benh.TenBenh,
                             HinhAnh = benh.HinhAnh,
-                            NguyenNhan = benh.NguyenNhan,
+                            NguyenNhan = "Locked",
                         });
                     }
                 }
@@ -378,14 +340,120 @@ namespace quanlybenh.Services.Implementation
                .Select(grp => grp.First())
               .ToList();
 
-            var listkq = new List<BenhDTO>(); 
+            var listkq = new List<BenhDTO>();
+            var listkq1 = new List<BenhDTO>();
 
-            listkq = sql4.Where(x => !entities.Any(y =>y.MaBenh ==x.MaBenh)).ToList();
+            listkq = sql4.Where(x => !entities.Any(y => y.MaBenh == x.MaBenh)).ToList();
+            listkq1 = listkq.Union(entities).ToList();
 
-            return listkq.GroupBy(test => test.MaBenh)
-                 .Select(grp => grp.First())
-                 .ToList();
-        
+            return listkq1;
         }
     }
+
+    //    public List<BenhDTO> GetAllBenhLienQuan(List<SearchDTO> searchString)
+    //    {
+    //        var entities = new List<BenhDTO>();
+    //        var lstTrieuChungs = _trieuchungRepository.GetAll().ToList();
+    //        var lstTrieuChungBenhs = _trieuchungbenhRepository.GetAll().ToList();
+    //        var lstBenh = _benhRepository.GetAll().ToList();
+    //        int res = 0;
+    //        List<BenhDTO> sql2 = new List<BenhDTO>();
+    //        List<BenhDTO> sql3 = new List<BenhDTO>();
+    //        var sql4 = new List<BenhDTO>();
+
+    //        if (searchString.Count() > 0)
+    //        {
+    //            foreach (var a in searchString)
+    //            {
+    //                List<TrieuChungBenh> sql1 = new List<TrieuChungBenh>();
+    //                sql1 = (from trieuchungbenh in lstTrieuChungBenhs
+    //                        where trieuchungbenh.MaTrieuChung == a.search
+    //                        select trieuchungbenh).ToList();
+    //                foreach (var b in sql1)
+    //                {
+    //                    sql2.Add(new BenhDTO { MaBenh = b.MaBenh });
+    //                }
+    //            }
+    //        }
+    //        sql2 = sql2.GroupBy(test => test.MaBenh)
+    //               .Select(grp => grp.First())
+    //               .ToList();
+
+    //        for (int i = 0; i < sql2.Count(); i++)
+    //        {
+    //            var list = lstTrieuChungBenhs.Where(x => x.MaBenh == sql2[i].MaBenh).ToList();
+    //            res = 0;
+    //            for (int j = 0; j < list.Count(); j++)
+    //            {
+    //                for (int p = 0; p < searchString.Count(); p++)
+    //                {
+    //                    if (list[j].MaTrieuChung == searchString[p].search)
+    //                    {
+    //                        res++;
+    //                        break;
+    //                    }
+    //                }
+    //                if (res == searchString.Count())
+    //                {
+    //                    var benh = lstBenh.SingleOrDefault(x => x.MaBenh == sql2[i].MaBenh);
+    //                    entities.Add(new BenhDTO
+    //                    {
+    //                        MaBenh = benh.MaBenh,
+    //                        TenBenh = benh.TenBenh,
+    //                        HinhAnh = benh.HinhAnh,
+    //                        NguyenNhan = benh.NguyenNhan,
+    //                        // ListBenhs = _mapper.Map<List<BenhDTO>>(sql4)
+    //                    });
+    //                }
+    //            }
+    //        }
+
+    //        entities = entities.GroupBy(test => test.MaBenh)
+    //             .Select(grp => grp.First())
+    //             .ToList();
+
+    //        sql3 = sql2.GroupBy(test => test.MaBenh)
+    //               .Select(grp => grp.First())
+    //               .ToList();
+    //        for (int i = 0; i < sql3.Count(); i++)
+    //        {
+    //            var list = lstTrieuChungBenhs.Where(x => x.MaBenh == sql3[i].MaBenh).ToList();
+    //            res = 0;
+    //            for (int j = 0; j < list.Count(); j++)
+    //            {
+    //                for (int p = 0; p < searchString.Count(); p++)
+    //                {
+    //                    if (list[j].MaTrieuChung != searchString[p].search)
+    //                    {
+    //                        res++;
+    //                        break;
+    //                    }
+    //                }
+    //                if (res != searchString.Count())
+    //                {
+    //                    var benh = lstBenh.SingleOrDefault(x => x.MaBenh == sql3[i].MaBenh);
+    //                    sql4.Add(new BenhDTO
+    //                    {
+    //                        MaBenh = benh.MaBenh,
+    //                        TenBenh = benh.TenBenh,
+    //                        HinhAnh = benh.HinhAnh,
+    //                        NguyenNhan = benh.NguyenNhan,
+    //                    });
+    //                }
+    //            }
+    //        }
+    //        sql4 = sql4.GroupBy(test => test.MaBenh)
+    //           .Select(grp => grp.First())
+    //          .ToList();
+
+    //        var listkq = new List<BenhDTO>(); 
+
+    //        listkq = sql4.Where(x => !entities.Any(y =>y.MaBenh ==x.MaBenh)).ToList();
+
+    //        return listkq.GroupBy(test => test.MaBenh)
+    //             .Select(grp => grp.First())
+    //             .ToList();
+
+    //    }
+    //}
 }
