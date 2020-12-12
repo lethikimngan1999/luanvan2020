@@ -291,8 +291,8 @@ namespace quanlybenh.Services.Implementation
             int res = 0;
             List<BenhDTO> sql2 = new List<BenhDTO>();
             List<BenhDTO> sql3 = new List<BenhDTO>();
-            List<BenhDTO> sql4 = new List<BenhDTO>();
-        
+            var sql4 = new List<BenhDTO>();
+
             if (searchString.Count() > 0)
             {
                 foreach (var a in searchString)
@@ -374,12 +374,18 @@ namespace quanlybenh.Services.Implementation
                     }
                 }
             }
+            sql4 = sql4.GroupBy(test => test.MaBenh)
+               .Select(grp => grp.First())
+              .ToList();
 
+            var listkq = new List<BenhDTO>(); 
 
+            listkq = sql4.Where(x => !entities.Any(y =>y.MaBenh ==x.MaBenh)).ToList();
 
-            return sql4 = sql4.Except(entities).GroupBy(test => test.MaBenh)
+            return listkq.GroupBy(test => test.MaBenh)
                  .Select(grp => grp.First())
                  .ToList();
+        
         }
     }
 }
