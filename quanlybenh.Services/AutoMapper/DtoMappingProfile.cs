@@ -6,12 +6,9 @@ using quanlybenh.Services.DTO.Ca;
 using quanlybenh.Services.DTO.HinhAnh;
 using quanlybenh.Services.DTO.Menu;
 using quanlybenh.Services.DTO.NhanVien;
+using quanlybenh.Services.DTO.TaiKhoanKhachHang;
 using quanlybenh.Services.DTO.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace quanlybenh.Services.AutoMapper
 {
@@ -82,6 +79,11 @@ namespace quanlybenh.Services.AutoMapper
             CreateMap<TrieuChungBenh, TrieuChungBenhDTO>();
             CreateMap<TrieuChungBenhDTO, TrieuChungBenh>();
 
+            CreateMap<KhachHangDTO, KhachHang>();
+            CreateMap<KhachHang, KhachHangDTO>();
+
+            CreateMap<TheoDoiThongTinDTO, TheoDoiThongTin>();
+            CreateMap<TheoDoiThongTin, TheoDoiThongTinDTO>();
         }
     }
 

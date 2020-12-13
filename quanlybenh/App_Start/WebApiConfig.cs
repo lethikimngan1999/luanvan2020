@@ -83,6 +83,8 @@ namespace quanlybenh
             services.AddTransient<IChungLoaiService, ChungLoaiService>();
             services.AddTransient<IChatLuongService, ChatLuongService>();
             services.AddTransient<IGiongService, GiongService>();
+            services.AddTransient<IKhachHangService, KhachHangService>();
+            services.AddTransient<ITheoDoiThongTinService, TheoDoiThongTinService>();
 
             var configMapper = new MapperConfiguration(cfg => {
                 cfg.AddProfile<DtoMappingProfile>();

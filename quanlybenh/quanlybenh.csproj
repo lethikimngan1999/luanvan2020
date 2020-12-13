@@ -237,10 +237,12 @@
     <Compile Include="Controllers\ChungLoaiController.cs" />
     <Compile Include="Controllers\GiongController.cs" />
     <Compile Include="Controllers\HinhAnhBienTheController.cs" />
+    <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\LieuTrinhController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\TheoDoiThongTinController.cs" />
     <Compile Include="Controllers\ThuocController.cs" />
     <Compile Include="Controllers\ThuocDieuTriController.cs" />
     <Compile Include="Controllers\TrieuChungBenhController.cs" />

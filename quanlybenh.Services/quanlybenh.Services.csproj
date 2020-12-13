@@ -124,7 +124,9 @@
     <Compile Include="DTO\HinhAnh\HinhAnhCaDTO.cs" />
     <Compile Include="DTO\Menu\MenuDTO.cs" />
     <Compile Include="DTO\NhanVien\NhanVienDTO.cs" />
+    <Compile Include="DTO\TaiKhoanKhachHang\KhachHangDTO.cs" />
     <Compile Include="DTO\TaiKhoanKhachHang\TaiKhoanKhachHangDTO.cs" />
+    <Compile Include="DTO\TaiKhoanKhachHang\TheoDoiThongTinDTO.cs" />
     <Compile Include="DTO\User\ChangePasswordDTO.cs" />
     <Compile Include="DTO\User\LoginDTO.cs" />
     <Compile Include="DTO\User\RoleDTO.cs" />
@@ -139,9 +141,11 @@
     <Compile Include="Implementation\ChungLoaiService.cs" />
     <Compile Include="Implementation\GiongService.cs" />
     <Compile Include="Implementation\HinhAnhBienTheService.cs" />
+    <Compile Include="Implementation\KhachHangService.cs" />
     <Compile Include="Implementation\LieuTrinhService.cs" />
     <Compile Include="Implementation\NhanVienService.cs" />
     <Compile Include="Implementation\RoleService.cs" />
+    <Compile Include="Implementation\TheoDoiThongTinService.cs" />
     <Compile Include="Implementation\ThuocDieuTriService.cs" />
     <Compile Include="Implementation\ThuocService.cs" />
     <Compile Include="Implementation\TrieuChungBenhService.cs" />
@@ -156,9 +160,11 @@
     <Compile Include="Interfaces\IChungLoaiService.cs" />
     <Compile Include="Interfaces\IGiongService.cs" />
     <Compile Include="Interfaces\IHinhAnhBienTheService.cs" />
+    <Compile Include="Interfaces\IKhachHangService.cs" />
     <Compile Include="Interfaces\ILieuTrinhService.cs" />
     <Compile Include="Interfaces\INhanVienService.cs" />
     <Compile Include="Interfaces\IRoleService.cs" />
+    <Compile Include="Interfaces\ITheoDoiThongTinService.cs" />
     <Compile Include="Interfaces\IThuocDieuTriService.cs" />
     <Compile Include="Interfaces\IThuocService.cs" />
     <Compile Include="Interfaces\ITrieuChungBenhService.cs" />
