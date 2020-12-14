@@ -65,5 +65,51 @@ namespace quanlybenh.Services.Implementation
         {
             throw new NotImplementedException();
         }
+
+        public bool Update(TheoDoiThongTinDTO thongtinDto)
+        {
+            try
+            {
+                var thongtin = _thongtinRepository.GetById(thongtinDto.MaThongTin);
+                // check nhan vien exist
+                if (thongtin == null) return false;
+
+                //Update nhan vien detail
+                thongtin.MaThongTin = thongtinDto.MaThongTin;
+                thongtin.MaKhachHang = thongtinDto.MaKhachHang;
+                thongtin.TenThongTin = thongtinDto.TenThongTin;
+                thongtin.TenBenh = thongtinDto.TenBenh;
+                thongtin.TenThuoc = thongtinDto.TenThuoc;
+
+                thongtin.ThoiGianDanhThuoc = thongtinDto.ThoiGianDanhThuoc;
+                thongtin.TrieuChung = thongtinDto.TrieuChung;
+                thongtin.KetQua = thongtinDto.KetQua;
+                thongtin.GhiChu = thongtinDto.GhiChu;
+               
+                _thongtinRepository.Update(thongtin);
+                _unitOfWork.Commit();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool Delete(string mathongtin)
+        {
+            try
+            {
+                var thongtin = _thongtinRepository.GetById(new Guid(mathongtin));
+                if (thongtin == null) return false;
+                _thongtinRepository.Remove(thongtin);
+                _unitOfWork.Commit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

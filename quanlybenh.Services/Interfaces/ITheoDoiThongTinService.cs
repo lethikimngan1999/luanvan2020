@@ -14,5 +14,10 @@ namespace quanlybenh.Services.Interfaces
        // ChungLoaiDTO GetById(string machungloai);
 
         bool Create(TheoDoiThongTinDTO thongtinDto);
+
+
+        bool Update(TheoDoiThongTinDTO thongtinDto);
+
+        bool Delete(string mathongtin);
     }
 }

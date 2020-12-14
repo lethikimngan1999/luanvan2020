@@ -41,5 +41,45 @@ namespace quanlybenh.Controllers
                 return await Task.FromResult(new BaseResponse(Message.CreateNotSuccess));
             }
         }
+
+        [HttpPut]
+
+        public async Task<BaseResponse> Update(TheoDoiThongTinDTO thongtinDto)
+        {
+            try
+            {
+                var result = _thongtinService.Update(thongtinDto);
+                if (result)
+                {
+                    return await Task.FromResult(new BaseResponse(result));
+                }
+                return await Task.FromResult(new BaseResponse(Message.UpdateNotSuccess));
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(new BaseResponse(Message.UpdateNotSuccess));
+            }
+        }
+
+
+        [HttpDelete]
+
+        public async Task<BaseResponse> Delete(string mathongtin)
+        {
+            try
+            {
+                var result = _thongtinService.Delete(mathongtin);
+                if (result)
+                {
+                    return await Task.FromResult(new BaseResponse(result));
+                }
+                return await Task.FromResult(new BaseResponse(Message.DeleteNotSuccess));
+            }
+            catch (Exception)
+            {
+                return await Task.FromResult(new BaseResponse(Message.DeleteNotSuccess));
+            }
+        }
+
     }
 }
