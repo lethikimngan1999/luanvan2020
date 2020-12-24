@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.IdentityModel.Tokens;
 using quanlybenh.DataModels.Repositories;
+using quanlybenh.Filters;
 using quanlybenh.Services.DTO.Base;
 using quanlybenh.Services.DTO.User;
 using quanlybenh.Services.Interfaces;
@@ -16,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using static quanlybenh.Utilities.Configurations.Constants;
+using Constants = quanlybenh.Utilities.Configurations.Constants;
 
 namespace quanlybenh.Controllers
 {
@@ -92,6 +94,7 @@ namespace quanlybenh.Controllers
         [HttpGet]
         [Authorize]
         [Route("api/Account/GetUser")]
+        [FeatureAuthentication((int)Constants.Action.CanRead)]
         public async Task<BaseResponse<UserDTO>> GetUser()
         {
             try

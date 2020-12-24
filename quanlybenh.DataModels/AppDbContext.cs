@@ -12,7 +12,7 @@ namespace quanlybenh.DataModels.Entities
           
         {
             this.Configuration.LazyLoadingEnabled = false;
-           // Database.SetInitializer(new DbInitializer(new ApplicationUserManager(new UserStore(this))));
+            //Database.SetInitializer(new DbInitializer(new ApplicationUserManager(new UserStore(this))));
         }
         public static AppDbContext Init()
         {

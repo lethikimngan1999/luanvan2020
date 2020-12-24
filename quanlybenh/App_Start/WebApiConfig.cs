@@ -71,6 +71,7 @@ namespace quanlybenh
             services.AddTransient<INhanVienService, NhanVienService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IUserRoleService, UserRoleService>();
             services.AddTransient<IBienTheService, BienTheService>();
             services.AddTransient<IHinhAnhBienTheService, HinhAnhBienTheService>();
             services.AddTransient<IThuocService, ThuocService>();

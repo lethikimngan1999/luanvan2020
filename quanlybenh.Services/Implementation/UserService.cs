@@ -10,7 +10,6 @@ using quanlybenh.Utilities.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static quanlybenh.Utilities.Configurations.Constants;
 
@@ -389,15 +388,15 @@ namespace quanlybenh.Services.Implementation
 
         public List<UserDTO> GetAllUserAccountActive()
         {
-            var _lstUsers = _userRepository.GetMany(p => p.Status == StatusObject.Active).OrderByDescending(p => p.CreatedDate).ToList();
+            var _lstUsers = _userRepository.GetMany(p => p.Status == StatusObject.Active && p.MaNhanVien != Guid.Empty).OrderByDescending(p => p.CreatedDate).ToList();
             var userDtos = _mapper.Map<List<UserDTO>>(_lstUsers);
             var entities = new List<Role>();
 
             foreach (var user in userDtos)
             {
                 //get thong tin nhan vien
-                var nhanvien = _nhanvienRepository.GetById(user.MaNhanVien);
-                user.Nhanvien = _mapper.Map<NhanVienDTO>(nhanvien);
+                var employee = _nhanvienRepository.GetById(user.MaNhanVien);
+                user.Nhanvien = _mapper.Map<NhanVienDTO>(employee);
 
                 // get danh sach vai tro user
 
