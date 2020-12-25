@@ -1,23 +1,18 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.IdentityModel.Tokens;
-using quanlybenh.DataModels.Repositories;
-using quanlybenh.Filters;
-using quanlybenh.Services.DTO.Base;
-using quanlybenh.Services.DTO.User;
-using quanlybenh.Services.Interfaces;
-using quanlybenh.Utilities.Configurations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
+using Microsoft.IdentityModel.Tokens;
+using quanlybenh.DataModels.Repositories;
+using quanlybenh.Services.DTO.Base;
+using quanlybenh.Services.DTO.User;
+using quanlybenh.Services.Interfaces;
+using quanlybenh.Utilities.Configurations;
 using static quanlybenh.Utilities.Configurations.Constants;
-using Constants = quanlybenh.Utilities.Configurations.Constants;
 
 namespace quanlybenh.Controllers
 {
@@ -35,11 +30,11 @@ namespace quanlybenh.Controllers
         private async Task<string> GenerateJwtToken(string UserName, UserDTO userDto)
         {
             var claims = new List<Claim>
-            {
+                {
                 new Claim(ClaimTypes.NameIdentifier, userDto.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+                };
 
             // get options
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppSettings.JwtKey));
@@ -47,12 +42,12 @@ namespace quanlybenh.Controllers
             var expires = DateTime.Now.AddDays(Convert.ToDouble(AppSettings.JwtExpireDays));
 
             var token = new JwtSecurityToken(
-                AppSettings.JwtIssuer,
-                AppSettings.JwtIssuer,
-                claims,
-                expires: expires,
-               signingCredentials: creds
-               );
+            AppSettings.JwtIssuer,
+            AppSettings.JwtIssuer,
+            claims,
+            expires: expires,
+            signingCredentials: creds
+            );
             return await Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token)).ConfigureAwait(false);
         }
 
@@ -94,7 +89,7 @@ namespace quanlybenh.Controllers
         [HttpGet]
         [Authorize]
         [Route("api/Account/GetUser")]
-        [FeatureAuthentication((int)Constants.Action.CanRead)]
+        // [FeatureAuthentication((int)QLKSConstants.Action.CanRead)]
         public async Task<BaseResponse<UserDTO>> GetUser()
         {
             try
