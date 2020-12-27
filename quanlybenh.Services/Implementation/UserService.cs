@@ -62,6 +62,10 @@ namespace quanlybenh.Services.Implementation
                 var employee = _nhanvienRepository.GetById(userDto.MaNhanVien);
                 userDto.Nhanvien = _mapper.Map<NhanVienDTO>(employee);
 
+                //get thong tin khach hang
+                var kh = _khachhangRepository.GetById(userDto.MaKhachHang);
+                userDto.Khachhang = _mapper.Map<KhachHangDTO>(kh);
+
                 // get danh sach vai tro user
 
                 var _lstUserRoles = _userRoleRepository.GetMany(p => p.UserId == user.Id).ToList();

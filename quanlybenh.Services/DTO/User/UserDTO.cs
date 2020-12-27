@@ -1,5 +1,6 @@
 ﻿using quanlybenh.Services.DTO.Base;
 using quanlybenh.Services.DTO.NhanVien;
+using quanlybenh.Services.DTO.TaiKhoanKhachHang;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace quanlybenh.Services.DTO.User
         public Guid MaKhachHang { get; set; }
         public string Status { get; set; }
         public virtual NhanVienDTO Nhanvien { get; set; }
-    
+        public virtual KhachHangDTO Khachhang { get; set; }
         public List<RoleDTO> ListRoles { get; set; }
         public IEnumerable<string> RoleIds { get; set; }
     }
