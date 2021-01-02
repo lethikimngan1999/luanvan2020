@@ -131,5 +131,21 @@ namespace quanlybenh.Services.Implementation
                 return false;
             }
         }
+
+        public bool Delete(string machungloai)
+        {
+            try
+            {
+                var chungloai = _chungloaiRepository.GetById(new Guid(machungloai));
+                if (chungloai == null) return false;
+                _chungloaiRepository.Remove(chungloai);
+                _unitOfWork.Commit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

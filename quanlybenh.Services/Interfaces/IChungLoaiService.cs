@@ -17,5 +17,7 @@ namespace quanlybenh.Services.Interfaces
         bool CheckExistsTenChungLoai(string tenchungloai);
 
         bool Update(ChungLoaiDTO chungloaiDto);
+
+        bool Delete(string machungloai);
     }
 }

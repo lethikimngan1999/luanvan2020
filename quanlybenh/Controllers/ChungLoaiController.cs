@@ -97,5 +97,24 @@ namespace quanlybenh.Controllers
             }
         }
 
+        [HttpDelete]
+
+        public async Task<BaseResponse> Delete(string machungloai)
+        {
+            try
+            {
+                var result = _chungloaiService.Delete(machungloai);
+                if (result)
+                {
+                    return await Task.FromResult(new BaseResponse(result));
+                }
+                return await Task.FromResult(new BaseResponse(Message.DeleteNotSuccess));
+            }
+            catch (Exception)
+            {
+                return await Task.FromResult(new BaseResponse(Message.DeleteNotSuccess));
+            }
+        }
+
     }
 }
