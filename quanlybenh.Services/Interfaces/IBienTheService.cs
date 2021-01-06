@@ -16,5 +16,6 @@ namespace quanlybenh.Services.Interfaces
         bool CheckExistsTen(string ten);
         BienTheDTO GetById(string mabienthe);
         List<BienTheDTO> GetListOfChungLoai(string machungloai);
+        bool Delete(string mabienthe);
     }
 }

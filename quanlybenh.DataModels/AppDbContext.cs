@@ -1,9 +1,6 @@
 namespace quanlybenh.DataModels.Entities
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
     using quanlybenh.Utilities.Configurations;
 
     public partial class AppDbContext : DbContext
@@ -18,7 +15,6 @@ namespace quanlybenh.DataModels.Entities
         {
             return new AppDbContext();
         }
-
 
         public virtual DbSet<Benh> Benhs { get; set; }
         public virtual DbSet<BienThe> BienThes { get; set; }

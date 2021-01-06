@@ -46,7 +46,7 @@ namespace quanlybenh
             );
 
             // add config swagger rourte
-            config.Routes.MapHttpRoute(
+             config.Routes.MapHttpRoute(
              name: "Swagger",
              routeTemplate: "",
              defaults: null,

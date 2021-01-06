@@ -137,5 +137,23 @@ namespace quanlybenh.Controllers
             }
         }
 
+        [HttpDelete]
+
+        public async Task<BaseResponse> Delete(string mabienthe)
+        {
+            try
+            {
+                var result = _bientheService.Delete(mabienthe);
+                if (result)
+                {
+                    return await Task.FromResult(new BaseResponse(result));
+                }
+                return await Task.FromResult(new BaseResponse(Message.DeleteNotSuccess));
+            }
+            catch (Exception)
+            {
+                return await Task.FromResult(new BaseResponse(Message.DeleteNotSuccess));
+            }
+        }
     }
 }

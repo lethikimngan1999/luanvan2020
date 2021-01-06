@@ -307,5 +307,28 @@ namespace quanlybenh.Services.Implementation
                 return null;
             }
         }
+
+        public bool Delete(string mabienthe)
+        {
+            try
+            {
+                var bienthe = _bientheRepository.GetById(new Guid(mabienthe));
+                if (bienthe == null) return false;
+               
+                var hinhanh = _hinhanhRepository.GetAll().Where(p => p.MaBienThe == bienthe.MaBienThe).ToList();
+                _hinhanhRepository.RemoveMultiple(hinhanh);
+                _unitOfWork.Commit();
+            
+
+                var bienthes = _bientheRepository.GetById(new Guid(mabienthe));
+                _bientheRepository.Remove(bienthes);
+                _unitOfWork.Commit();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }
