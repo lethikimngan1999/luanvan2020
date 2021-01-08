@@ -159,6 +159,24 @@ namespace quanlybenh.Services.Implementation
             var employeeDtos = _mapper.Map<List<NhanVienDTO>>(entities);
             return employeeDtos;
         }
+
+        public NhanVienDTO GetByCMND(string cmnd)
+        {
+            try
+            {
+                var user = _nhanvienRepository.GetMany(p => p.CMND.ToLower() == cmnd.ToLower().Trim()).FirstOrDefault();
+                if (user == null)
+                {
+                    return null;
+                }
+                var userDto = _mapper.Map<NhanVienDTO>(user);
+                return userDto;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 
 }

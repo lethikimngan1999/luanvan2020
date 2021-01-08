@@ -22,7 +22,8 @@ namespace quanlybenh.Services.Interfaces
 
         List<NhanVienDTO> GetEmployeeNotAccount();
         bool CheckExistsNhanVienByIdentityCardNumber(string cmnd);
-     //   bool CheckExistsEmployeePositionInEmployee(string nhanVienId);
+        NhanVienDTO GetByCMND(string cmnd);
+        //   bool CheckExistsEmployeePositionInEmployee(string nhanVienId);
 
     }
 }

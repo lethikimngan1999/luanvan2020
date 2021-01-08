@@ -129,6 +129,27 @@ namespace quanlybenh.Controllers
             }
         }
 
+
+        [HttpGet]
+        [Route("GetByCMND")]
+
+        public async Task<BaseResponse<NhanVienDTO>> GetByCMND(string cmnd)
+        {
+            try
+            {
+                var result = _NhanVienService.GetByCMND(cmnd);
+                if (result != null)
+                {
+                    return await Task.FromResult(new BaseResponse<NhanVienDTO>(result));
+                }
+                return await Task.FromResult(new BaseResponse<NhanVienDTO>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                return await Task.FromResult(new BaseResponse<NhanVienDTO>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+            }
+        }
+
         [HttpGet]
         [Route("GetEmployeeNotAccount")]
 
