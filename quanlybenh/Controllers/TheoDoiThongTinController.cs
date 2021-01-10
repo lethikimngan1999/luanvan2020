@@ -81,5 +81,25 @@ namespace quanlybenh.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("thongke")]
+
+        public async Task<BaseResponse<List<ThongKeDTO>>> thongke(int month, int year )
+        {
+            try
+            {
+                var result = _thongtinService.Thongke(month, year);
+                if (result != null)
+                {
+                    return await Task.FromResult(new BaseResponse<List<ThongKeDTO>>(result, true)).ConfigureAwait(false);
+                }
+
+                return await Task.FromResult(new BaseResponse<List<ThongKeDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+            }
+            catch
+            {
+                return await Task.FromResult(new BaseResponse<List<ThongKeDTO>>(Message.GetDataNotSuccess, false)).ConfigureAwait(false);
+            }
+        }
     }
 }

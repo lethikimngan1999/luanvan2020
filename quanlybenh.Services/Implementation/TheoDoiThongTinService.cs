@@ -111,5 +111,43 @@ namespace quanlybenh.Services.Implementation
                 return false;
             }
         }
+
+        public List<ThongKeDTO> Thongke(int month, int year)
+        {
+            int[] arr1 = new int[100];
+            int[] fr1 = new int[100];
+            int i, j, bien_dem;
+
+            var lsts = _thongtinRepository.GetMany(x => x.ThoiGianDanhThuoc.Value.Month == month && x.ThoiGianDanhThuoc.Value.Year == year).ToList();
+            var sql = new List<ThongKeDTO>();
+            for (i = 0; i < lsts.Count(); i++)
+            {
+                fr1[i] = -1;
+            }           
+                for (i = 0; i < lsts.Count(); i++)
+                {
+                bien_dem = 1;
+                    for (j = i + 1; j < lsts.Count(); j++)
+                    {
+                        if (lsts[i].TenBenh == lsts[j].TenBenh)
+                        {
+                            bien_dem++;
+                            fr1[j] = 0;
+                        }
+                    }
+
+                    if (fr1[i] != 0)
+                    {
+                        fr1[i] = bien_dem;
+                   
+                    sql.Add(new ThongKeDTO { y = fr1[i], label = lsts[i].TenBenh });
+                    }
+            }
+            sql = sql.GroupBy(test => test.label)
+                    .Select(grp => grp.First())
+                    .ToList();
+                return sql;
+            }
+        }
     }
-}
+

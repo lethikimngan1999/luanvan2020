@@ -127,6 +127,7 @@
     <Compile Include="DTO\TaiKhoanKhachHang\KhachHangDTO.cs" />
     <Compile Include="DTO\TaiKhoanKhachHang\TaiKhoanKhachHangDTO.cs" />
     <Compile Include="DTO\TaiKhoanKhachHang\TheoDoiThongTinDTO.cs" />
+    <Compile Include="DTO\TaiKhoanKhachHang\ThongKeDTO.cs" />
     <Compile Include="DTO\User\ChangePasswordDTO.cs" />
     <Compile Include="DTO\User\LoginDTO.cs" />
     <Compile Include="DTO\User\RoleDTO.cs" />

@@ -19,5 +19,8 @@ namespace quanlybenh.Services.Interfaces
         bool Update(TheoDoiThongTinDTO thongtinDto);
 
         bool Delete(string mathongtin);
+
+        List<ThongKeDTO> Thongke(int month, int date);
+
     }
 }
