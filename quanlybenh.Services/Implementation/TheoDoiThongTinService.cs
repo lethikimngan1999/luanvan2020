@@ -112,12 +112,16 @@ namespace quanlybenh.Services.Implementation
             }
         }
 
-        public List<ThongKeDTO> Thongke(int month, int year)
+        public List<ThongKeDTO> Thongke(int? month, int? year)
         {
             int[] arr1 = new int[100];
             int[] fr1 = new int[100];
             int i, j, bien_dem;
-
+            if( month == null && year == null)
+            {
+                month = DateTime.Now.Month;
+                year = DateTime.Now.Year;
+            }
             var lsts = _thongtinRepository.GetMany(x => x.ThoiGianDanhThuoc.Value.Month == month && x.ThoiGianDanhThuoc.Value.Year == year).ToList();
             var sql = new List<ThongKeDTO>();
             for (i = 0; i < lsts.Count(); i++)

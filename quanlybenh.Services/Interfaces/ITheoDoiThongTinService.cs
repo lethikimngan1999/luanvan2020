@@ -20,7 +20,7 @@ namespace quanlybenh.Services.Interfaces
 
         bool Delete(string mathongtin);
 
-        List<ThongKeDTO> Thongke(int month, int date);
+        List<ThongKeDTO> Thongke(int? month, int? date);
 
     }
 }
