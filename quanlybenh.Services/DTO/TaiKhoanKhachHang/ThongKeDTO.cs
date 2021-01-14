@@ -8,8 +8,9 @@ namespace quanlybenh.Services.DTO.TaiKhoanKhachHang
 {
     public class ThongKeDTO
     {
-        public int y { get; set; }
-        public string label { get; set; }
+        public string name { get; set; }
+        public int value { get; set; }
+       
         
     }
 }

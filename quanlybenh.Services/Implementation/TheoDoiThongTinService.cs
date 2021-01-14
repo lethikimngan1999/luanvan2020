@@ -144,10 +144,10 @@ namespace quanlybenh.Services.Implementation
                     {
                         fr1[i] = bien_dem;
                    
-                    sql.Add(new ThongKeDTO { y = fr1[i], label = lsts[i].TenBenh });
+                    sql.Add(new ThongKeDTO { name = lsts[i].TenBenh , value = fr1[i]});
                     }
             }
-            sql = sql.GroupBy(test => test.label)
+            sql = sql.GroupBy(test => test.name)
                     .Select(grp => grp.First())
                     .ToList();
                 return sql;
